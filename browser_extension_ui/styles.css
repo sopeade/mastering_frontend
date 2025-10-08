@@ -1,0 +1,162 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    text-decoration: none;
+    caret-color: transparent;
+}
+
+:root {
+    /*--MAIN_FONT: #FAF9F6;*/
+    --MAIN_FONT: hsl(45 2% 98%);
+    /*--MAIN_FONT2: #FFF;*/
+    /*--BLACK: #000;*/
+    /*--BLUE_BACKGROUND: #0d1428;*/
+    --BLUE_BACKGROUND: hsl(228, 74%, 8%);
+    /*--BLUE_CARD: #202535;*/
+    --BLUE_CARD: hsl(226 25% 17%);
+    /*--CARD_BUTTON: #20252d;*/
+    --CARD_BUTTON: hsl(217 29% 18%);
+    --SLIDER_OFF: hsl(224 12% 36%);
+    --SLIDER_ON: hsl(3 85% 64%);
+    /*--LIGHT_BORDER: #3d4766;*/
+    --LIGHT_BORDER: hsl(225 40% 40%);
+
+}
+
+body {
+    /*background-color: rgba(19, 27, 44);*/
+    background-color: var(--BLUE_BACKGROUND);
+    color: var(--MAIN_FONT);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+    margin: 10px auto;
+    max-width: min(80%, 900px);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--BLUE_CARD);
+    padding: 5px;
+    border-radius: 12px;
+    color: hsl(210 90% 50%);
+    /*color: white;*/
+    >img:nth-of-type(1){
+        width: 110px
+    }
+}
+
+section {
+    margin-top: 30px;
+}
+
+.extension_title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    li:nth-of-type(1) {
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    li:nth-of-type(2)>ul {
+        display: flex;
+        gap: 10px;
+        li {
+            font-size: 0.75rem;
+            padding: 5px 15px;
+            border-radius: 30px;
+            background-color: var(--CARD_BUTTON);
+        }
+    }
+}
+
+
+.card_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 6px;
+}
+
+
+.card {
+    min-height: 120px;
+    background-color: var(--BLUE_CARD);
+    border-radius: 15px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 0.75rem;
+    font-weight: lighter;
+    img {
+        max-width: 35px;
+    }
+
+    >div:nth-of-type(1){
+        display: flex;
+        gap: 0 10px;
+        h4 {
+            margin-bottom: 5px;
+        }
+        p {
+            font-weight: 100;
+        }
+    }
+
+    >div:nth-of-type(2){
+        display: flex;
+        justify-content: space-between;
+    }
+    button {
+        font-size: 0.75rem;
+        border: 1px solid var(--LIGHT_BORDER);
+        border-radius: 15px;
+        background-color:  var(--CARD_BUTTON);
+        padding: 3px;
+        width: max(65px, 25%);
+        color: var(--MAIN_FONT);
+    }
+
+    .toggle_container{
+        display: inline-block;
+        position: relative;
+        width:30px;
+        height:15px;
+        top: 5px;
+        input{
+            display: none;
+        }
+
+        .toggle {
+            display: inherit;
+            width: 100%;
+            height: 100%;
+            background-color: var(--SLIDER_OFF);
+            border-radius: 7.5px;
+        }
+
+        .toggle::before{
+            position: relative;
+            display: inherit;
+            content: "";
+            width: 11px;
+            height: 11px;
+            background-color: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: 0.3s;
+        }
+        .toggle:has(+ input:checked){
+            background-color: var(--SLIDER_ON);
+        }
+        .toggle:has(+ input:checked)::before {
+            transform: translate(15px);
+        }
+    }
+}
