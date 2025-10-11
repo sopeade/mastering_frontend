@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+    caret-color: transparent;
+}
+
+:root {
+    --TEXT_BACKGROUND: hsl(248 43% 25%/60%);
+    --BORDER_COLOR: hsl(240 20% 40%);
+    --SUBMIT_COLOR: hsl(7 88% 67%);
+    --PLACEHOLDER_COLOR: hsl(220 20% 60%);
+    font-family: monospace;
+
+}
+
+
+/*.attribution { font-size: 11px; text-align: center; }*/
+/*.attribution a { color: hsl(228, 45%, 44%); }*/
+
+
+body {
+    background-image: url("assets/images/pattern-lines.svg"), url("assets/images/pattern-squiggly-line-bottom-desktop.svg"),
+        url("assets/images/background-desktop.png");
+    background-position: top left, bottom left, top;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    border: 10px solid green;
+    height: 100vh;
+}
+.icon_container {
+    text-align: center;
+    margin: 20px auto;
+}
+
+header img {
+    transform: scale(70%);
+}
+
+main {
+    max-width: min(500px, 70%);
+    margin: 150px auto 100px auto;
+    header {
+        margin: 0 auto;
+        text-align: center;
+    }
+    h1{
+        font-size: 2.5rem;
+        /*font-weight: ;*/
+    }
+}
+
+form {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    margin: 50px auto 0 auto;
+    width: max(60%, 275px);
+    height: auto;
+
+    label {
+        display: block;
+        margin-top: 15px;
+    }
+
+    input {
+        border: 1px solid var(--BORDER_COLOR);
+        border-radius: 5px;
+        line-height: 25px;
+        margin: 5px 0 0 0;
+        background-color: var(--TEXT_BACKGROUND);
+
+        &::placeholder {
+            color: var(--PLACEHOLDER_COLOR);
+            font-size: smaller;
+        }
+    }
+
+    .form_container {
+        display: grid;
+        align-self: center;
+        width: 100%;
+        height: 5rem;
+        border: 1px dashed var(--BORDER_COLOR);
+        border-radius: 5px;
+        background-color: var(--TEXT_BACKGROUND);
+        margin: 0 0 10px 0;
+        cursor: pointer;
+        background-image: url("assets/images/icon-upload.svg");
+        background-repeat: no-repeat;
+        background-position: top center ;
+    }
+
+    .form_container::before{
+        content: "Upload Avatar";
+        transform: translateY(-70%);
+    }
+    .form_container::after {
+        content: "Drag and drop or click to upload";
+        justify-self: center;
+        transform: translateY(30%);
+        font-size: x-small;
+        color: var(--PLACEHOLDER_COLOR);
+    }
+    .avatar{
+        display: none;
+    }
+
+    .submit_button {
+        margin: 10px 0;
+        height: 2.5rem;
+        border-radius: 5px;
+        background-color: var(--SUBMIT_COLOR);
+    }
+}
+
