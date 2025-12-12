@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<!--    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>-->
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div class="page_container">
+            <nav>
+                <span><img src="" alt="weather icon">Weather Now</span>
+                <span><img src="" alt="gear icon">Units</span>
+            </nav>
+            <header><p class="text-xl">How's the sky looking today?</p></header>
+            <section class="search">
+                <input type="text" class="search_box">
+                <button class="search_box">Search</button>
+            </section>
+            <main>
+                <div class="box a">A</div>
+                <div class="box b">B</div>
+                <div class="box c">
+                    <div class="data">
+                        <p>Feels Like</p>
+                        <p></p>
+                    </div>
+                    <div class="data">
+                        <p>Humidity</p>
+                        <p></p>
+                    </div>
+                    <div class="data">
+                        <p>Wind</p>
+                        <p></p>
+                    </div>
+                    <div class="data">
+                        <p>Precipitation</p>
+                    <p>{{}}</p>
+                    </div>
+                </div>
+                <div class="box d">
+                </div>
+                <div class="box e">
+                    {{typeof(data.current)}}
+<!--                    {{Object.keys(data.current)}}-->
+                    {{data.current?.temperature}}
+<!--                    {{data.split('')}}-->
+                </div>
+                <div class="box e">
+<!--                    <li v-for="value in data">-->
+<!--                        {{value}}-->
+<!--                    </li>-->
+<!--                    {{waffles_data}}-->
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+<script src="./app.js">
+</script>
+</html>
