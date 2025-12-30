@@ -108,8 +108,6 @@ Refined my general approach for layout out a site quickly.
 - Website - [Sopeade Lanlehin](https://www.sopelanlehin.com)
 - Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
 
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
-
 ## Acknowledgments
 
 I utilized Sandrina's approach(https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/) 
