@@ -68,7 +68,7 @@ export const getWeatherIcon = (code) => {
     if (code >= 60 && code <= 69 ) return './assets/images/icon-rain.webp';
     if (code >= 70 && code <= 79 ) return './assets/images/icon-snow.webp';
     if (code >= 80 && code <= 84 ) return './assets/images/icon-rain.webp';
-    if (code === 85 && code === 86 ) return './assets/images/icon-rain.webp';
+    if (code === 85 || code === 86 ) return './assets/images/icon-rain.webp';
     if (code >= 95 && code <= 99 ) return './assets/images/icon-storm.webp';
 }
 

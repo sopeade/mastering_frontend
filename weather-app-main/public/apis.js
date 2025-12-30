@@ -30,7 +30,7 @@ export const getWeather = async (lat, long, wind_unit, temp_unit, prec_unit)=> {
             return
         }
         const data = await response.json();
-        // console.log("weather data:", data);
+        console.log("weather data:", data);
         return data;
     } catch (error) {
         console.log(error.message);

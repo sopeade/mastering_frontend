@@ -40,7 +40,7 @@ createApp({
             temp_unit: 'celsius',
             prec_unit: 'mm',
         });
-        const city = ref('dallas');
+        const city = ref('');
         const location = ref('');
         const hours = ref([])
 
@@ -48,7 +48,7 @@ createApp({
             /* Get api data (lat, long, weather etc.) and store in local variables
             * */
             // console.log("updateData")
-            location.value = await getLocation(city.value);
+            location.value = await getLocation(city.value || 'dallas');
             weather.value = await getWeather(location.value[0].latitude, location.value[0].longitude,
                 weather_units.wind_unit, weather_units.temp_unit, weather_units.prec_unit);
             createDailyForecast(weather, dailyForecast)

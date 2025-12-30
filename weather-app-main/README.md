@@ -10,6 +10,7 @@ This is a solution to the [Weather app challenge on Frontend Mentor](https://www
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
+  - [Files](#files)
   - [Instructions to Run](#run)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
@@ -56,6 +57,15 @@ Users should be able to:
 - Mobile-first workflow
 - [Vue.js via CDN](https://vuejs.org/) - Vue Framework
 
+### Files 
+server.js             - Setup express server
+public/apis.js        - Make api calls to open-meteo
+public/app.js         - Core Vue js file
+public/utils.js       - Supporting functions 
+public/index.html     - Markup document
+public/styles.css     - styling document
+public/assets/images  - Image assets
+public/assets/fonts   - local fonts
 
 ### Instructions to run manually
 1. Navigate to main directory (with server.js file)
