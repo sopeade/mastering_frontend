@@ -6,61 +6,166 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<!--    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>-->
+<!--    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>-->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <div id="app">
-        <div class="page_container">
-            <nav>
-                <span><img src="" alt="weather icon">Weather Now</span>
-                <span><img src="" alt="gear icon">Units</span>
-            </nav>
-            <header><p class="text-xl">How's the sky looking today?</p></header>
-            <section class="search">
-                <input type="text" class="search_box">
-                <button class="search_box">Search</button>
-            </section>
+<div id="app">
+    <div class="container">
+        <div class="container_main">
+            <header>
+                <img src="./assets/images/logo.svg" alt="">
+                <Teleport to="body">
+                    <div v-if="isOverlay" class="overlay" @click.self="closeModal">
+                    </div>
+                </Teleport>
+                <div class="select">
+<!--Accessible Select Approach Inspiration Source: https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/-->
+                    <span class="selectLabel" id="measurements">Units</span>
+                    <div class="selectWrapper">
+                        <select name="" id="" class="selectNative" aria-labelledby="measurements">
+                            <option class="selectNative-options" value="imperial">Switch to Imperial</option>
+                            <option class="selectNative-options" disabled value="">Temperature</option>
+                            <option class="selectNative-options" value="celsius" >Celsius (&deg C)</option>
+                            <option class="selectNative-options" value="fahrenheit" >Fahrenheit(F)</option>
+                            <option class="selectNative-options" disabled value="">Wind Speed</option>
+                            <option class="selectNative-options" value="kmh">km/h</option>
+                            <option class="selectNative-options" value="mph">mph</option>
+                            <option class="selectNative-options" disabled value="">Precipitation</option>
+                            <option class="selectNative-options" value="mm">Millimeters(mm)</option>
+                            <option class="selectNative-options" value="inch">Inches (in)</option>
+                        </select>
+
+                         <div class="selectCustom" :aria-hidden="isUnitsDisplayed" :class="{isActive: isUnitsDisplayed}" @click.stop="toggleUnitsDropdown()">
+                            <div class="selectCustom-options" @click.stop>
+                                <div class="selectCustom-option" data-value="" @click="toggleToImperial(isSelected, weather_units)">
+                                    <span>Switch to Imperial</span>
+                                    <span v-if="isSelected.imperial">
+                                        <img src="assets/images/icon-checkmark.svg" class="checkmark" width="30" height="30" alt="">
+                                    </span>
+                                </div>
+                                <hr>
+                                <div class="selectCustom-option inactive" data-value="">Temperature</div>
+                                <div class="selectCustom-option text-md" data-value="celsius" @click="toggleUnit(isSelected, weather_units, 'celsius', 'fahrenheit',  )">
+                                    <span>Celsius (&degC)</span>
+                                    <span v-if="isSelected.celsius">
+                                        <img src="assets/images/icon-checkmark.svg" class="checkmark"  alt="">
+                                    </span>
+                                </div>
+                                <div class="selectCustom-option text-md" data-value="fahrenheit" @click="toggleUnit(isSelected, weather_units, 'fahrenheit', 'celsius')">
+                                    <span>Fahrenheit(&degF)</span>
+                                    <span v-if="!isSelected.celsius">
+                                        <img src="assets/images/icon-checkmark.svg" class="checkmark" alt="">
+                                    </span>
+                                </div>
+                                <hr>
+                                <div class="selectCustom-option inactive" data-value="">Wind Speed</div>
+                                <div class="selectCustom-option text-md" data-value="kmh" @click="toggleUnit(isSelected, weather_units, 'kmh', 'mph')">
+                                    <span>km/h</span>
+                                    <span v-if="isSelected.kmh">
+                                        <img src="assets/images/icon-checkmark.svg" class="checkmark" alt="">
+                                    </span>
+                                </div>
+                                <div class="selectCustom-option text-md" data-value="mph"  @click="toggleUnit(isSelected, weather_units, 'mph', 'kmh')">
+                                    <span>mph</span>
+                                    <span v-if="!isSelected.kmh">
+                                        <img src="assets/images/icon-checkmark.svg" class="checkmark" alt="">
+                                    </span>
+                                </div>
+                                <hr>
+                                <div class="selectCustom-option inactive" data-value="">Precipitation</div>
+                                <div class="selectCustom-option text-md" data-value="mm" @click="toggleUnit(isSelected, weather_units, 'mm', 'inch')">
+                                    <span>Millimeters(mm)</span>
+                                    <span v-if="isSelected.mm">
+                                        <img src="assets/images/icon-checkmark.svg" class="checkmark" alt="">
+                                    </span>
+                                </div>
+                                <div class="selectCustom-option text-md" data-value="inch" @click="toggleUnit(isSelected, weather_units, 'inch', 'mm')">
+                                    <span>Inches (in)</span>
+                                    <span v-if="!isSelected.mm">
+                                    <img src="assets/images/icon-checkmark.svg" class="checkmark" alt="">
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </header>
+            <h2 class="hero">
+                <span>How's the sky looking today?</span>
+            </h2>
+            <div class="search">
+                <label for="search" class="visually-hidden">Search</label>
+                <input type="text" id="search" name="search" v-model="city" placeholder="Search for a place...">
+                <button @click="updateData">Search</button>
+            </div>
             <main>
-                <div class="box a">A</div>
-                <div class="box b">B</div>
-                <div class="box c">
-                    <div class="data">
-                        <p>Feels Like</p>
-                        <p></p>
+                <section class="item_container location">
+                    <div class="current_location">
+                        <div class="current_city">{{`${location[0]?.name}, ${location[0]?.country}`}}</div>
+                        <div class="current_date">{{getCurrentDate(weather)}}</div>
                     </div>
-                    <div class="data">
-                        <p>Humidity</p>
-                        <p></p>
+
+                    <div class="current_icons">
+                        <img :src="getWeatherIcon(weather?.current?.weather_code)" class="weather_icon" alt="" width="320" height="320">
+                        <img src="assets/images/bg-today-large.svg" class="desktop" alt="">
                     </div>
-                    <div class="data">
-                        <p>Wind</p>
-                        <p></p>
+                    <div class="current_temp"><span>{{weather.current?.apparent_temperature?.toPrecision(2)}}</span>&deg</div>
+                </section>
+                <section class="item_container daily_values">
+                    <div class="daily-values-items temperature">
+                        <p class="daily-values-item-title">Feels Like</p>
+                        <p><span>{{weather.current?.apparent_temperature.toPrecision(2)}} {{weather.current_units?.apparent_temperature}}</span></p>
                     </div>
-                    <div class="data">
-                        <p>Precipitation</p>
-                    <p>{{}}</p>
+                    <div class="daily-values-items Humidity">
+                        <p class="daily-values-item-title">Humidity</p>
+                        <p><span>{{weather.current?.relative_humidity_2m.toPrecision(2)}} {{weather.current_units?.relative_humidity_2m}}</span></p>
                     </div>
-                </div>
-                <div class="box d">
-                </div>
-                <div class="box e">
-                    {{typeof(data.current)}}
-<!--                    {{Object.keys(data.current)}}-->
-                    {{data.current?.temperature}}
-<!--                    {{data.split('')}}-->
-                </div>
-                <div class="box e">
-<!--                    <li v-for="value in data">-->
-<!--                        {{value}}-->
-<!--                    </li>-->
-<!--                    {{waffles_data}}-->
-                </div>
+                    <div class="daily-values-items Wind">
+                        <p class="daily-values-item-title">Wind</p>
+                        <p><span>{{weather.current?.wind_speed_10m.toPrecision(2)}} {{weather.current_units?.wind_speed_10m}}</span></p>
+                    </div>
+                    <div class="daily-values-items Precipitation">
+                        <p class="daily-values-item-title"> Precipitation</p>
+                        <p><span>{{weather.current?.precipitation.toPrecision(2)}} {{weather.current_units?.precipitation}}</span></p>
+                    </div>
+                </section>
+                <section class="item_container daily_forecast">
+                   <div v-for="(_, dayIndex) in 7" class="daily_forecast_items">
+                       <p class="weekday">{{ dailyForecast?.weekdays[dayIndex] }}</p>
+                       <img :src="getWeatherIcon(weather?.daily?.weather_code[dayIndex])" class="weather_icon" alt="" >
+                       <p class="daily_high_low">
+                           <span>{{dailyForecast?.temp_high[dayIndex]?.toPrecision(2)}}&deg</span>
+                           <span>{{dailyForecast?.temp_low[dayIndex]?.toPrecision(2)}}&deg</span>
+                       </p>
+                   </div>
+                </section>
+                <section class="item_container hourly_forecast">
+                    <div class="forecast_header">
+                        <span>Hourly forecast</span>
+                        <span class="weekday_dropdown_container">
+                            <label for="weekday" class="for"></label>
+                            <select name="weekday" id="weekday" class="weekday" v-model="dailyForecast.dayIndex" @change="onDayChange()">
+                               <option :value=`${dayIndex}` v-for="(_, dayIndex) in 7">{{ dailyForecast?.weekdays_long[dayIndex] }}</option>
+                            </select>
+                        </span>
+                    </div>
+                    <div class="hourly_container">
+                        <div v-for="([val, offset], hourIndex) in hours" :key="hours.id" class="hour_item">
+                            <div class="weather_time">
+                                <img :src="getWeatherIcon(weather?.hourly?.weather_code[hourIndex + offset])" alt="" class="weather_icon">
+                                <span class="hour">{{val}}</span>
+                            </div>
+                            <span class="temp">{{weather.hourly?.temperature_2m[hourIndex + offset].toPrecision(2)}}&deg</span>
+                        </div>
+                    </div>
+                </section>
             </main>
         </div>
     </div>
+</div>
 </body>
-<script src="./app.js">
-</script>
+<script type="module" src="./app.js"></script>
 </html>
