@@ -78,6 +78,7 @@
         display: grid;
         grid-template-columns: 1fr calc(100% - 32px) 1fr;
         background-color: var(--COLOR-CONTAINER);
+        overflow-y: scroll;
     }
 
     .container_main {
@@ -379,7 +380,7 @@
         }
 
         .container_main {
-            grid-template-rows: 50px 200px 70px auto;
+            grid-template-rows: 50px 120px 70px auto;
             justify-content: stretch;
 
         }
