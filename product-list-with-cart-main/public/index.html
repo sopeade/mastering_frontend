@@ -14,9 +14,11 @@
 <div id="app">
     <div class="container">
         <div class="container_main">
-            <h1 class="heading dark">Desserts</h1>
-            <section class="item_container">
-                <article class="item" v-for="(item, idx) in data" :key="item.key">
+            <main>
+                <h1 class="heading dark">Desserts</h1>
+
+                <section class="item_container">
+                    <article class="item" v-for="(item, idx) in data" :key="item.key">
                     <figure class="image_container">
                         <img :src="item.image.mobile" class="mobile" width=654 height=424 alt="">
                         <img :src="item.image.tablet" class="tablet" width=427 height=424 alt="">
@@ -24,8 +26,8 @@
                     </figure>
                     <transition name="fade" mode="out-in">
                         <button v-if="cart.quantity[idx] === 0" class="add_to_cart" @click="increment(cart, idx)">
-                            <img src="assets/images/icon-add-to-cart.svg" width="21" height="20" alt="">
-                            <span>Add to Cart</span>
+                            <img src="assets/images/icon-add-to-cart.svg" class="cart" width="21" height="20" alt="">
+                            <span class="empty">Add to Cart</span>
                         </button>
                         <button v-else class="add_to_cart red" >
                             <figure  @click="decrement(cart, idx)" class="minus">
@@ -39,7 +41,6 @@
                                     <img src="./assets/images/icon-increment-quantity.svg"  class="plus" width="10" height="10" alt="">
                                 </div>
                             </figure>
-
                         </button>
                     </transition>
                     <div class="label">
@@ -48,10 +49,10 @@
                         <p class="orange">${{item.price.toPrecision(3)}}</p>
                     </div>
                 </article>
-            </section>
+                </section>
+            </main>
             <section class="cart_container">
-                <h2>Your Cart({{cart.totalNumItems}})</h2>
-<!--                <hr>-->
+                <h2 class="red">Your Cart({{cart.totalNumItems}})</h2>
                 <div class="order_container" v-for="(itemIdx, idx) in cart.itemIndexes" :key="itemIdx.key">
                     <div class="left_side">
                         <img v-if="modal" class="" src="" alt="">
@@ -81,6 +82,7 @@
                     </figure>
                     <p >This is a <span>carbon-neutral</span> delivery</p>
                 </div>
+                <button class="confirm">Confirm Order</button>
             </section>
         </div>
     </div>
