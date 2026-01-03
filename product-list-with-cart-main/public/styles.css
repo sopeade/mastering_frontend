@@ -1,0 +1,278 @@
+/*Hosting Fonts Locally*/
+@layer global {
+
+    @font-face {
+        font-family: "RedHatText-italic";
+        src: url("assets/fonts/RedHatText-Italic-VariableFont_wght.ttf");
+    }
+
+    @font-face {
+        font-family: "RedHatText";
+        src: url("assets/fonts/RedHatText-VariableFont_wght.ttf");
+    }
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    :root {
+        --COLOR-BACKGROUND: hsl(26 54% 97%);
+        --COLOR-BUTTON_CLICKED: hsl(15 87% 42%);
+        --COLOR-TEXT: hsl(6 59% 10%);
+        --COLOR-ORANGE: hsl(30 60% 30%);
+        --RADIUS-BUTTON: 40px;
+        --RADIUS-CARD: 15px;
+        list-style: none;
+        font-family: RedHatText, sans-serif;
+        color: white;
+        * {
+            /*outline: 1px solid blue;*/
+        }
+    }
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .desktop {
+        display: none;
+    }
+
+    input, button, textarea, select, .card {
+        font-size: 1rem;
+        font-style: inherit;
+        border: 1px solid transparent;
+        background-color: transparent;
+        color: black;
+    }
+}
+
+
+@layer desserts {
+    .tablet, .desktop {
+        display: none
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: 1fr min(calc(100% - 100px), calc(400/16 * 1rem)) 1fr;
+        background-color: var(--COLOR-BACKGROUND);
+        > * {
+            grid-column: 2;
+        }
+
+    }
+    .container_main{
+        display: grid;
+        gap: 1rem;
+    }
+    .dark {
+        font-weight: 600;
+        color: var(--COLOR-TEXT);
+    }
+    .heading {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin: 1.5rem 0 0 0;
+    }
+
+    .light {
+        font-weight: 200;
+        color: var(--COLOR-TEXT)
+    }
+    .orange {
+        font-weight: 400;
+        color: var(--COLOR-ORANGE);
+    }
+
+    .item_container {
+        display: grid;
+        gap: 1.5rem;
+    }
+    .item {
+        /*border-radius: 20px;*/
+        /*overflow: hidden;*/
+        /*border: 2px solid black;*/
+        min-width: 350px;
+        /*position: relative;*/
+        .image_container img {
+            border-radius: var(--RADIUS-CARD);
+
+            &:hover {
+                outline: 2px solid var(--COLOR-ORANGE);
+
+            }
+        }
+    }
+    article > figure {
+        /*border: 2px solid green;*/
+        position: relative;
+    }
+
+    article > figure::before {
+        /*This creates a cutout of the button directly underneath the button
+        Thus any button transitions will briefly leave a empty background slot for the
+        for a cleaner look*/
+        content: "";
+        position: absolute;
+        height: 50px;
+        left: 50%;
+        top: 100%;
+        width: min(50%, 300px);
+        transform: translate(-50%, -50%);
+        border-radius: var(--RADIUS-BUTTON);
+        background-color: var(--COLOR-BACKGROUND);
+    }
+
+    .add_to_cart {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid grey;
+        border-radius: var(--RADIUS-BUTTON);
+        padding: 12px 10px;
+        width: min(50%, 300px) ;
+        height: 50px;
+        gap: 20px;
+        transform: translateY(-50%);
+        margin: 0 auto;
+        background-color: white;
+        img {
+            width: 25px;
+            object-position: center;
+        }
+        span {
+            align-self: center;
+        }
+
+    }
+
+    .add_to_cart.red {
+        color: white;
+        background-color: var(--COLOR-BUTTON_CLICKED);
+        justify-content: space-between;
+
+        figure {
+            padding: 10%;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            .circle {
+                display: flex;
+                justify-content: center;
+                padding: 7px;
+                align-items: center;
+                width: 10px;
+                border: 1px solid white;
+                height: 10px;
+                border-radius: 50%;
+            }
+
+            img {
+                padding: 4px;
+            }
+        }
+
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity 0.2s ease-in;
+    }
+
+    .fade-enter-from,
+    .fade-leave-to {
+        opacity: 0;
+    }
+
+
+
+
+}
+
+@layer cart {
+    .cart_container {
+        display: grid;
+        border-radius: var(--RADIUS-CARD);
+        background-color: white;
+        color: black;
+        padding: 2rem;
+        gap: 1rem;
+
+    }
+    .order_container {
+        display: flex;
+        padding: 1.5rem 0;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+    .left_side {
+
+    }
+
+    .right_side {
+        align-self: center;
+        width: 1rem;
+        height: 1rem;
+        border: 1px solid grey;
+        border-radius: 50%;
+    }
+
+    .order_item {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 1rem;
+    }
+    .amount_container{
+        display: flex;
+        gap: 2rem;
+    }
+    .prices {
+        display: flex;
+        gap: 1rem;
+    }
+    .amount_container .red {
+        color: var(--COLOR-BUTTON_CLICKED);
+    }
+    hr {
+        flex: 0 0 100%;
+        font-weight: 100;
+        background-color: lightgrey;
+    }
+    .total_container {
+        display: flex;
+        justify-content: space-between;
+        /*border: 2px solid black;*/
+        span {
+            align-self: center;
+        }
+        .total_item {
+            font-weight: 700;
+            font-size: 2rem;
+        }
+
+    }
+    .eco_label {
+        display: flex;
+        padding: 1.5rem;
+        background-color: var(--COLOR-BACKGROUND);
+        border-radius: 5px;
+        span {
+            font-weight: 700;
+        }
+    }
+
+}
+/*@layer tablet {*/
+/*    @media (min-width: 768px) {*/
+/*    }*/
+
+/*}*/

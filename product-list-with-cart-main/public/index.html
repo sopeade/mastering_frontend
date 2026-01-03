@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+    <div class="container">
+        <div class="container_main">
+            <h1 class="heading dark">Desserts</h1>
+            <section class="item_container">
+                <article class="item" v-for="(item, idx) in data" :key="item.key">
+                    <figure class="image_container">
+                        <img :src="item.image.mobile" class="mobile" width=654 height=424 alt="">
+                        <img :src="item.image.tablet" class="tablet" width=427 height=424 alt="">
+                        <img :src="item.image.desktop" class="desktop" width=502 height=480 alt="">
+                    </figure>
+                    <transition name="fade" mode="out-in">
+                        <button v-if="cart.quantity[idx] === 0" class="add_to_cart" @click="increment(cart, idx)">
+                            <img src="assets/images/icon-add-to-cart.svg" width="21" height="20" alt="">
+                            <span>Add to Cart</span>
+                        </button>
+                        <button v-else class="add_to_cart red" >
+                            <figure  @click="decrement(cart, idx)" class="minus">
+                                <div class="circle">
+                                    <img src="./assets/images/icon-decrement-quantity.svg"  width="10" height="2" alt="">
+                                </div>
+                            </figure>
+                            <span>{{cart.quantity[idx]}}</span>
+                            <figure @click="increment(cart, idx)" class="plus">
+                                <div class="circle">
+                                    <img src="./assets/images/icon-increment-quantity.svg"  class="plus" width="10" height="10" alt="">
+                                </div>
+                            </figure>
+
+                        </button>
+                    </transition>
+                    <div class="label">
+                        <p class="light">{{item.category}}</p>
+                        <p class="dark">{{item.name}}</p>
+                        <p class="orange">${{item.price.toPrecision(3)}}</p>
+                    </div>
+                </article>
+            </section>
+            <section class="cart_container">
+                <h2>Your Cart({{cart.totalNumItems}})</h2>
+<!--                <hr>-->
+                <div class="order_container" v-for="(itemIdx, idx) in cart.itemIndexes" :key="itemIdx.key">
+                    <div class="left_side">
+                        <img v-if="modal" class="" src="" alt="">
+                        <div class="order_item">
+                            <p>{{data[itemIdx].name}}</p>
+                            <div class="amount_container">
+                                <div class="quantity red">{{cart.quantity[itemIdx]}}x</div>
+                                <div class="prices">
+                                    <span>@ ${{cart.price[itemIdx].toPrecision(3)}}</span>
+                                    <span>${{cart.itemTotal[itemIdx].toPrecision(3)}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right_side">
+                        <img src="./assets/images/icon-remove-item.svg" alt="">
+                    </div>
+                    <hr>
+                </div>
+                <p v-if="cart.cartTotal > 0" class="total_container">
+                    <span>Order Total</span>
+                    <span class="total_item">${{cart.cartTotal}}</span>
+                </p>
+                <div class="eco_label">
+                    <figure>
+                        <img src="./assets/images/icon-carbon-neutral.svg" width="21" height="20" alt="">
+                    </figure>
+                    <p >This is a <span>carbon-neutral</span> delivery</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>
+</body>
+<script type="module" src="./app.js"></script>
+<!--<script src="./app2.js"></script>-->
+</html>
