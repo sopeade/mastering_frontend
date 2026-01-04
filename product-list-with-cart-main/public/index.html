@@ -29,19 +29,19 @@
                             <img src="assets/images/icon-add-to-cart.svg" class="cart" width="21" height="20" alt="">
                             <span class="empty">Add to Cart</span>
                         </button>
-                        <button v-else class="add_to_cart red" >
-                            <figure  @click="decrement(cart, idx)" class="minus">
+                        <div v-else class="add_to_cart red" role="button">
+                            <button  @click="decrement(cart, idx)" class="minus">
                                 <div class="circle">
                                     <img src="./assets/images/icon-decrement-quantity.svg"  width="10" height="2" alt="">
                                 </div>
-                            </figure>
-                            <span>{{cart.quantity[idx]}}</span>
-                            <figure @click="increment(cart, idx)" class="plus">
+                            </button>
+                            <span class="quantity">{{cart.quantity[idx]}}</span>
+                            <button @click="increment(cart, idx)" class="plus">
                                 <div class="circle">
-                                    <img src="./assets/images/icon-increment-quantity.svg"  class="plus" width="10" height="10" alt="">
+                                    <img src="./assets/images/icon-increment-quantity.svg"  width="10" height="10" alt="">
                                 </div>
-                            </figure>
-                        </button>
+                            </button>
+                        </div>
                     </transition>
                     <div class="label">
                         <p class="light">{{item.category}}</p>

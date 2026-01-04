@@ -45,7 +45,9 @@
         width: 100%;
         height: auto;
     }
-
+    button {
+        cursor: pointer;
+    }
     .desktop {
         display: none;
     }
@@ -53,9 +55,12 @@
     input, button, textarea, select, .card {
         font-size: 1rem;
         font-style: inherit;
-        /*border: 1px solid transparent;*/
-        /*background-color: transparent;*/
+        border: 1px solid transparent;
+        background-color: transparent;
         color: black;
+        /*outline: none;*/
+        /*box-shadow: none;*/
+        /*border-color: inherit;*/
     }
 }
 
@@ -153,15 +158,13 @@
         border: 1px solid grey;
         border-radius: var(--RADIUS-BUTTON);
         padding: 12px 10px;
-        /*width: min(50%, 300px) ;*/
-        /*width: clamp(50%, 300px) ;*/
-        /*width: 150px;*/
         width: var(--WIDTH-ADD-TO-CART);
         height: var(--HEIGHT-BUTTON);
         gap: 20px;
         transform: translateY(-50%);
         margin: 0 auto;
         background-color: white;
+        cursor: pointer;
         img {
             width: 20px;
             object-position: center;
@@ -169,21 +172,29 @@
         span {
             align-self: center;
         }
-        &:hover {
 
-        }
     }
 
     .add_to_cart.red {
+        display: flex;
         color: white;
         background-color: var(--COLOR-BUTTON_CLICKED);
-        justify-content: space-between;
-
-        figure {
+        .quantity {
+            min-width: 10px;
+        }
+        cursor: unset;
+        .minus {
+            position: relative;
+            right:0.3rem;
+        }
+        .plus {
+            position: relative;
+            left:0.3rem;
+        }
+        button {
             padding: 10%;
-            width: var(--WIDTH-ADD-TO-CART);
-            height: var(--HEIGHT-BUTTON);
             border-radius: 50%;
+
             .circle {
                 display: flex;
                 justify-content: center;
@@ -198,8 +209,13 @@
             img {
                 padding: 4px;
             }
+            &:focus {
+                /*outline: 1px solid grey;*/
+            }
         }
+        .minus {
 
+        }
     }
 
     .fade-enter-active, .fade-leave-active {
