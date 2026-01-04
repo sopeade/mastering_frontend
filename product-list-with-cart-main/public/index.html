@@ -53,28 +53,30 @@
             </main>
             <section class="cart_container">
                 <h2 class="red">Your Cart({{cart.totalNumItems}})</h2>
-                <div class="order_container" v-for="(itemIdx, idx) in cart.itemIndexes" :key="itemIdx.key">
-                    <div class="left_side">
-                        <img v-if="modal" class="" src="" alt="">
-                        <div class="order_item">
-                            <p>{{data[itemIdx].name}}</p>
-                            <div class="amount_container">
-                                <div class="quantity red">{{cart.quantity[itemIdx]}}x</div>
-                                <div class="prices">
-                                    <span>@ ${{cart.price[itemIdx].toPrecision(3)}}</span>
-                                    <span>${{cart.itemTotal[itemIdx].toPrecision(3)}}</span>
+                <transition-group name="list" tag="div">
+                    <div class="order_container" v-for="(itemIdx, _) in cart.itemIndexes" :key="itemIdx">
+                        <div class="left_side">
+                            <img v-if="modal" class="" src="" alt="">
+                            <div class="order_item">
+                                <p>{{data[itemIdx].name}}</p>
+                                <div class="amount_container">
+                                    <div class="quantity red">{{cart.quantity[itemIdx]}}x</div>
+                                    <div class="prices">
+                                        <span>@ ${{cart.price[itemIdx].toPrecision(3)}}</span>
+                                        <span>${{cart.itemTotal[itemIdx].toPrecision(3)}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <button class="right_side close" @click="removeItem(cart, itemIdx)" alt="Remove Item from Cart">
+                            <img src="./assets/images/icon-remove-item.svg" alt="">
+                        </button>
+                        <hr>
                     </div>
-                    <div class="right_side">
-                        <img src="./assets/images/icon-remove-item.svg" alt="">
-                    </div>
-                    <hr>
-                </div>
+                </transition-group>
                 <p v-if="cart.cartTotal > 0" class="total_container">
                     <span>Order Total</span>
-                    <span class="total_item">${{cart.cartTotal}}</span>
+                    <span class="total_cart">${{cart.cartTotal}}</span>
                 </p>
                 <div class="eco_label">
                     <figure>
@@ -82,8 +84,49 @@
                     </figure>
                     <p >This is a <span>carbon-neutral</span> delivery</p>
                 </div>
-                <button class="confirm">Confirm Order</button>
+                <button v-if="cart.totalNumItems > 0" class="confirm" @click="isCheckedOut=true">Confirm Order</button>
             </section>
+            <Teleport to="body">
+
+                <Transition name="fade" mode="out-in">
+                    <section v-if="isCheckedOut" class="overlay" @click.self="closeModal">
+                    <div class="modal" @click.stop>
+                        <figure class="check_container">
+                            <img src="./assets/images/icon-order-confirmed.svg" width=48 height=48 class="check_img" alt="order_confirmed">
+                        </figure>
+                        <div class="confirmed_label">
+                            <h3 class="heading dark">Order Confirmed</h3>
+                            <p>We hope you enjoy your food!</p>
+                        </div>
+                        <section class="confirmed_order">
+                            <div class="order_container" v-for="(itemIdx, idx) in cart.itemIndexes" :key="itemIdx.key">
+                                 <div class="left_side">
+                                    <img class="thumbnail" :src="data[itemIdx].image.thumbnail" alt="">
+                                    <div class="order_item">
+                                        <p>{{data[itemIdx].name}}</p>
+                                        <div class="amount_container">
+                                            <div class="quantity red">{{cart.quantity[itemIdx]}}x</div>
+                                            <div class="prices">
+                                                <span>@ ${{cart.price[itemIdx].toFixed(2)}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right_side">
+                                    <span class="total_item">${{cart.itemTotal[itemIdx].toFixed(2)}}</span>
+                                </div>
+                                <hr>
+                            </div>
+                            <p v-if="cart.cartTotal > 0" class="total_container">
+                                <span>Order Total</span>
+                                <span class="total_cart">${{cart.cartTotal}}</span>
+                            </p>
+                        </section>
+                        <button class="confirm" @click="resetCart">Start New Order</button>
+                    </div>
+                </section>
+                </Transition>
+            </Teleport>
         </div>
     </div>
 

@@ -29,7 +29,8 @@
         --COLOR-GREY: hsl(0 0% 80%);
         --RADIUS-BUTTON: 40px;
         --RADIUS-CARD: 15px;
-        --HEIGHT-BUTTON: 3rem;
+        --HEIGHT-BUTTON: 2.8rem;
+        --WIDTH-ADD-TO-CART: clamp(150px, 30%, 200px);
         list-style: none;
         font-family: RedHatText, sans-serif;
         color: white;
@@ -51,8 +52,8 @@
     input, button, textarea, select, .card {
         font-size: 1rem;
         font-style: inherit;
-        border: 1px solid transparent;
-        background-color: transparent;
+        /*border: 1px solid transparent;*/
+        /*background-color: transparent;*/
         color: black;
     }
 }
@@ -65,8 +66,10 @@
 
     .container {
         display: grid;
-        grid-template-columns: 1fr min(calc(100% - 100px), calc(400/16 * 1rem)) 1fr;
+        grid-template-columns: 1fr min(calc(100% - 100px), 1200px) 1fr;
         background-color: var(--COLOR-BACKGROUND);
+        height: 100vh;
+        overflow: scroll;
         > * {
             grid-column: 2;
         }
@@ -86,7 +89,7 @@
     .heading {
         font-size: 2.5rem;
         font-weight: 800;
-        margin: 1.5rem 0 0 0;
+        /*margin: 1.5rem 0 0 0;*/
     }
 
     .light {
@@ -106,12 +109,12 @@
     .item_container {
         display: grid;
         gap: 1.5rem;
+        /*min-width: 250px;*/
+        /*width: clamp(250px, 70%, 1200px);*/
+        min-width: 250px;
     }
 
     .item {
-        /*width: 240px;*/
-        /*min-width: 300px;*/
-        /*width: clamp(320px, 80%, 400px);*/
         .image_container img {
             border-radius: var(--RADIUS-CARD);
 
@@ -134,7 +137,7 @@
         height: var(--HEIGHT-BUTTON);
         left: 50%;
         top: 100%;
-        width: min(50%, 300px);
+        width: var(--WIDTH-ADD-TO-CART);
         transform: translate(-50%, -50%);
         border-radius: var(--RADIUS-BUTTON);
         background-color: var(--COLOR-BACKGROUND);
@@ -147,14 +150,17 @@
         border: 1px solid grey;
         border-radius: var(--RADIUS-BUTTON);
         padding: 12px 10px;
-        width: min(50%, 300px) ;
+        /*width: min(50%, 300px) ;*/
+        /*width: clamp(50%, 300px) ;*/
+        /*width: 150px;*/
+        width: var(--WIDTH-ADD-TO-CART);
         height: var(--HEIGHT-BUTTON);
         gap: 20px;
         transform: translateY(-50%);
         margin: 0 auto;
         background-color: white;
         img {
-            width: 25px;
+            width: 20px;
             object-position: center;
         }
         span {
@@ -172,7 +178,7 @@
 
         figure {
             padding: 10%;
-            width: 3rem;
+            width: var(--WIDTH-ADD-TO-CART);
             height: var(--HEIGHT-BUTTON);
             border-radius: 50%;
             .circle {
@@ -194,18 +200,93 @@
     }
 
     .fade-enter-active, .fade-leave-active {
-        transition: opacity 0.2s ease-in;
+        transition: opacity 0.15s ease-in;
     }
 
     .fade-enter-from,
-
     .fade-leave-to {
         opacity: 0;
     }
 
 
+    /*--------------------------------*/
+    /*https://www.youtube.com/watch?v=axqkKVcvgpg&t=304s*/
+    .test_transition {
+        color: black;
+    }
+    .list-move,
+    .list-enter-active, .list-leave-active {
+        transition: all 0.5s ease;
+        /*color: black;*/
+    }
 
 
+    .list-enter-from,
+    .list-leave-to {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    .list-leave-active {
+        position: absolute;
+     /*transition: transform 0.5s;*/
+    }
+    /*--------------------------------*/
+    .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /*visibility: hidden;*/
+        /*opacity: 0;*/
+        /*transition: opacity 0.4s ease, visibility 0.4s ease;*/
+    }
+
+}
+@layer checkout_modal {
+    .modal {
+        display: grid;
+        border: 1px solid #6f6f6f;
+        border-radius: 0.4rem;
+        background-color: white;
+        box-shadow: 0 0 4px #e9e1f8;
+        z-index: 1;
+        gap: 1rem;
+        padding: 2rem;
+        /*> * {*/
+        /*    outline: 2px solid black;*/
+        /*}*/
+    }
+
+    .check_container {
+        max-height: 100px;
+        .check_img {
+            width: 3rem;
+        }
+    }
+    .confirmed_label{
+        color: var(--COLOR-TEXT);
+    }
+    .order_container{
+       display: flex;
+        padding: 0;
+       justify-content: space-between;
+    }
+    .confirmed_order {
+
+        background-color: var(--COLOR-BACKGROUND);
+        color: var(--COLOR-TEXT);
+        padding: 0 1rem 1rem 1rem;
+        border-radius: var(--RADIUS-CARD);
+    }
+    .left_side {
+        display: flex;
+        gap: 2rem;
+        .thumbnail {
+            max-width: 50px;
+        }
+    }
 }
 
 @layer cart {
@@ -228,12 +309,15 @@
     }
 
 
-    .right_side {
+    .right_side.close {
         align-self: center;
         width: 1rem;
         height: 1rem;
         border: 1px solid grey;
         border-radius: 50%;
+        &:hover {
+            transform: scale(1.2);
+        }
     }
 
     .order_item {
@@ -269,7 +353,7 @@
         span {
             align-self: center;
         }
-        .total_item {
+        .total_cart {
             font-weight: 700;
             font-size: 2rem;
         }
@@ -300,27 +384,15 @@
     .empty {
         font-size: 0.8rem;
     }
-    .cart {
-        max-width: 18px;
-    }
-    /*.add_to_cart {*/
-    /*    width: max(50%, 120px);*/
-    /*}*/
 }
 @media (min-width: 768px) {
-    .container {
-        display: grid;
-        grid-template-columns: 1fr min(calc(100% - 100px), calc(1440/16 * 1rem)) 1fr;
-        background-color: var(--COLOR-BACKGROUND);
-    }
-
     .container_main {
         display: grid;
-        /*grid-template-columns: 1fr 1fr 1fr;*/
+        grid-template-columns: 2.5fr 1fr;
 
     }
-    .add_to_cart {
-        gap: min(15px, 25%);
+    .item_container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 
     .mobile {
@@ -331,29 +403,4 @@
         display: block;
     }
 
-     main {
-        grid-column: 1 / 3;
-    }
-
-    .cart_container {
-        grid-column: 3 / 4;
-    }
-
-    .item_container {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-    .item {
-        /*width:  clamp(300px, 90%, 400px);*/
-       /*width: max(280px, 20%, 350px);*/
-        width: 350px;
-        /*width: 280px;*/
-        /*max-width: 260px;*/
-    }
-    .tablet {
-        display: none;
-    }
-    .desktop {
-        display: block;
-    }
 }
