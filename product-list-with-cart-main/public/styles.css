@@ -31,6 +31,7 @@
         --RADIUS-CARD: 15px;
         --HEIGHT-BUTTON: 2.8rem;
         --WIDTH-ADD-TO-CART: clamp(150px, 30%, 200px);
+        --SIZE-TRANSFORMS-ON-HOVER: 1.07;
         list-style: none;
         font-family: RedHatText, sans-serif;
         color: white;
@@ -320,7 +321,7 @@
         border: 1px solid grey;
         border-radius: 50%;
         &:hover {
-            transform: scale(1.2);
+            transform: scale(var(--SIZE-TRANSFORMS-ON-HOVER));
         }
     }
 
@@ -381,6 +382,9 @@
         color: white;
         height: var(--HEIGHT-BUTTON);
         width: 100%;
+        &:hover {
+            transform: scale(var(--SIZE-TRANSFORMS-ON-HOVER));
+        }
     }
 }
 
