@@ -86,8 +86,8 @@
                 </div>
                 <button v-if="cart.totalNumItems > 0" class="confirm" @click="isCheckedOut=true">Confirm Order</button>
             </section>
-            <Teleport to="body">
 
+            <Teleport to="body">
                 <Transition name="fade" mode="out-in">
                     <section v-if="isCheckedOut" class="overlay" @click.self="closeModal">
                     <div class="modal" @click.stop>
