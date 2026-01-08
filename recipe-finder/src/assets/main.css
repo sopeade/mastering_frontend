@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    /*@font-face {*/
+    /*    font-family: "RedHatText-italic";*/
+    /*    src: url("assets/fonts/RedHatText-Italic-VariableFont_wght.ttf");*/
+    /*}*/
+
+    /*@font-face {*/
+    /*    font-family: "RedHatText";*/
+    /*    src: url("assets/fonts/RedHatText-VariableFont_wght.ttf");*/
+    /*}*/
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    :root {
+        --COLOR-BACKGROUND: hsl(26 54% 97%);
+        --COLOR-BUTTON_CLICKED: hsl(15 87% 42%);
+        --COLOR-TEXT: hsl(6 59% 10%);
+        --COLOR-ORANGE: hsl(30 60% 30%);
+        --COLOR-GREY: hsl(0 0% 80%);
+        --RADIUS-BUTTON: 40px;
+        --RADIUS-CARD: 15px;
+        --HEIGHT-BUTTON: 2.8rem;
+        --WIDTH-ADD-TO-CART: clamp(150px, 30%, 200px);
+        --SIZE-TRANSFORMS-ON-HOVER: 1.07;
+        list-style: none;
+        font-family: RedHatText, sans-serif;
+        color: black;
+    }
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+    button {
+        cursor: pointer;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    input, button, textarea, select {
+        font-size: 1rem;
+        font-style: inherit;
+        border: 1px solid transparent;
+        /*background-color: transparent;*/
+        color: black;
+    }
+}
+
+h1 {
+    color: red;
+}
