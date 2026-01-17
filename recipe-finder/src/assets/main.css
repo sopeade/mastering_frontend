@@ -1,20 +1,17 @@
 @import "tailwindcss";
-
-@tailwind base;
-@tailwind components;
 @tailwind utilities;
 
 @layer base {
+    @font-face {
+        font-family: "Nunito-italic";
+        src: url("src/assets/fonts/Nunito/Nunito-Italic-VariableFont_wght.ttf");
+    }
 
-    /*@font-face {*/
-    /*    font-family: "RedHatText-italic";*/
-    /*    src: url("assets/fonts/RedHatText-Italic-VariableFont_wght.ttf");*/
-    /*}*/
+    @font-face {
+        font-family: "Nunito";
+        src: url("src/assets/fonts/Nunito/Nunito-VariableFont_wght.ttf");
+    }
 
-    /*@font-face {*/
-    /*    font-family: "RedHatText";*/
-    /*    src: url("assets/fonts/RedHatText-VariableFont_wght.ttf");*/
-    /*}*/
 
     * {
         padding: 0;
@@ -27,7 +24,7 @@
     }
 
     :root {
-        --COLOR-BACKGROUND: hsl(26 54% 97%);
+        background-color: var(--color-peach);
         --COLOR-BUTTON_CLICKED: hsl(15 87% 42%);
         --COLOR-TEXT: hsl(6 59% 10%);
         --COLOR-ORANGE: hsl(30 60% 30%);
@@ -38,8 +35,8 @@
         --WIDTH-ADD-TO-CART: clamp(150px, 30%, 200px);
         --SIZE-TRANSFORMS-ON-HOVER: 1.07;
         list-style: none;
-        font-family: RedHatText, sans-serif;
-        color: black;
+        font-family: Nunito, sans-serif;
+        color: var(--color-darkgreen);
     }
 
     img {
@@ -62,8 +59,13 @@
         /*background-color: transparent;*/
         color: black;
     }
+
+    @theme {
+    --color-peach: hsl(48 22% 95%);
+    --color-darkgreen: hsl(170 45% 16%);
+    --color-lightgreen: hsl(150 11% 89%);
+    --breakpoint-2lg: 90rem;
+
+    }
 }
 
-h1 {
-    color: red;
-}
