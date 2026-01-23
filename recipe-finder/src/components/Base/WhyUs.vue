@@ -2,8 +2,8 @@
 </script>
 
 <template>
-  <div class="flex flex-col gap-10 mb-48 2lg:flex-row 2lg:gap-16">
-    <h1 class="font-extrabold text-5xl min-w-[372px]">Why we exist</h1>
+  <div class="flex flex-col gap-10 2lg:flex-row 2lg:gap-16">
+    <h1 class="font-extrabold text-5xl min-w-93">Why we exist</h1>
     <div class="grid gap-12">
       <div class="flex gap-5">
         <img src="@/assets/images/icon-bullet-point.svg" class="w-8 self-start" width=32 height=32 alt="">
@@ -39,9 +39,9 @@
 
     </div>
   </div>
-
-  <div class="flex flex-col gap-10 mb-48 2lg:flex-row 2lg:gap-16">
-    <h1 class="text-5xl font-extrabold min-w-[372px]">Our food philosophy</h1>
+  <hr class="w-screen relative left-1/2 my-24 right-1/2 -mx-[50vw] border border-lightgreen">
+  <div class="flex flex-col gap-10 2lg:flex-row 2lg:gap-16">
+    <h1 class="text-5xl font-extrabold min-w-93">Our food philosophy</h1>
     <div class="grid gap-12">
       <div class="flex gap-5">
         <img src="@/assets/images/icon-bullet-point.svg" class="w-8 self-start" width=32 height=32 alt="">
@@ -80,4 +80,5 @@
       </div>
     </div>
   </div>
+  <hr class="w-screen relative left-1/2 my-24 right-1/2 -mx-[50vw] border border-lightgreen">
 </template>

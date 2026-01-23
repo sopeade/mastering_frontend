@@ -5,7 +5,7 @@ import femaleChopping_lrg from "@/assets/images/image-about-our-mission-large.we
 </script>
 
 <template>
-    <div class="grid justify-between gap-8 mt-12 mb-48 2lg:mt-20 2lg:justify-center 2lg:grid-cols-2">
+    <div class="grid justify-between gap-8 mt-12 2lg:mt-20 2lg:justify-center 2lg:grid-cols-2">
       <div class="flex flex-col gap-7 justify-center ">
           <h4 class="bg-orange-300 w-fit rounded-md px-2 py-1">Our mission</h4>
           <h1 class="text-5xl font-extrabold">
@@ -21,12 +21,14 @@ import femaleChopping_lrg from "@/assets/images/image-about-our-mission-large.we
             no ultra-processed shortcuts—just honest ingredients and straightforward steps.
           </p>
       </div>
-      <div class="self-center border-2 border-blue-500">
+      <div class="self-center">
           <figure class="">
-            <img class="rounded-2xl object-cover border-6 border-white 2lg:hidden" :src="femaleChopping" alt="">
-            <img class="hidden 2lg:block rounded-2xl object-cover border-6 border-white" :src="femaleChopping_lrg" alt="">
+            <img class="rounded-2xl object-cover 2lg:hidden" :src="femaleChopping" alt="">
+            <img class="hidden 2lg:block rounded-2xl object-cover" :src="femaleChopping_lrg" alt="">
           </figure>
       </div>
     </div>
+
+    <hr class="w-screen relative left-1/2 my-24 right-1/2 -mx-[50vw] border-1 border-lightgreen">
 
 </template>

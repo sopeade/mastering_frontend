@@ -1,9 +1,8 @@
-<script>
-</script>
+<script></script>
 
 
 <template>
-  <div class="grid justify-between min-h-[600px] gap-8 pt-4">
+  <div class="grid justify-between min-h-[600px] gap-8 pt-4 lg:justify-center">
     <slot name="header"/>
     <slot name="description"/>
     <slot name="hero_button"/>

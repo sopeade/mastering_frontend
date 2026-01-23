@@ -7,26 +7,26 @@ import logo from "@/assets/images/logo.svg";
 
 
 <template>
-  <div class="flex justify-between items-center h-[72px] px-8 2lg:px-15 md:h-[92px] border-b-1 border-b-lightgreen">
-    <img :src="logo" class="w-[242px] h-[32px]" width="260" height="40" alt="">
-    <div class="hidden 2lg:flex flex-row gap-15 :underline">
+  <div class="flex justify-between items-center h-18 px-8 2lg:px-15 md:h-23 border-b border-b-lightgreen">
+    <img :src="logo" class="w-60.5 h-8" width="260" height="40" alt="">
+    <div class="hidden lg:flex flex-row gap-15">
       <RouterLink :to="{name: 'home'}">
-        <div class="active:underline decoration-orange-500 decoration-2 focus:underline-offset-1"
-          >
+        <button class="decoration-orange-500 decoration-2 hover:underline hover:underline-offset-1 rounded-sm
+            focus:outline-2 focus:outline-offset-2">
           Home
-        </div>
+        </button>
       </RouterLink>
       <RouterLink :to="{name: 'about'}">
-        <div class="active:underline decoration-orange-500 decoration-2 focus:underline-offset-1"
-          >
+        <button class="decoration-orange-500 decoration-2 hover:underline hover:underline-offset-1 rounded-sm
+            focus:outline-2 focus:outline-offset-2">
           About
-        </div>
+        </button>
       </RouterLink>
       <RouterLink :to="{name: 'recipes'}">
-        <div class="active:underline decoration-orange-500 decoration-2 focus:underline-offset-1"
-          >
+        <button class="decoration-orange-500 decoration-2 hover:underline hover:underline-offset-1 rounded-sm
+            focus:outline-2 focus:outline-offset-2">
           Recipes
-        </div>
+        </button>
       </RouterLink>
     </div>
     <Hamburger/>

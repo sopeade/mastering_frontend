@@ -1,8 +1,14 @@
-<script setup lang="ts">
+<script setup>
+import RecipeHeader from "@/components/Recipes/RecipeHeader.vue"
+import RecipeMeals from "@/components/Recipes/RecipeMeals.vue"
 
 </script>
 
 
+
 <template>
-  <h1>The Recipes view</h1>
+  <div class="">
+    <RecipeHeader/>
+    <RecipeMeals/>
+  </div>
 </template>
