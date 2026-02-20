@@ -1,0 +1,71 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: "PublicSans-italic";
+        src: url("src/assets/fonts/PublicSans-italic-VariableFont_wght.ttf");
+    }
+
+    @font-face {
+        font-family: "PublicSans";
+        src: url("src/assets/fonts/PublicSans-VariableFont_wght.ttf");
+    }
+
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    :root {
+        --BACKGROUND-COLOR: var(--color-peach);
+        --COLOR-BUTTON_CLICKED: hsl(15 87% 42%);
+        --COLOR-TEXT: hsl(6 59% 10%);
+        --COLOR-ORANGE: hsl(30 60% 30%);
+        --COLOR-GREY: hsl(0 0% 80%);
+        --RADIUS-BUTTON: 40px;
+        --RADIUS-CARD: 15px;
+        --HEIGHT-BUTTON: 2.8rem;
+        --WIDTH-ADD-TO-CART: clamp(150px, 30%, 200px);
+        --SIZE-TRANSFORMS-ON-HOVER: 1.07;
+        list-style: none;
+        font-family: PublicSans, sans-serif;
+        /*color: var(--color-darkgreen);*/
+    }
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+    button {
+        cursor: pointer;
+    }
+
+
+    input, button, textarea, select {
+        font-size: 1rem;
+        font-style: inherit;
+        border: 1px solid transparent;
+        color: black;
+    }
+
+    @theme {
+    --color-peach: hsl(30 36% 96%);
+    --color-potgreen: hsl(177 52% 32%);
+    --color-potlightgreen: hsl(190 52% 68%);
+    --color-potgrey: hsl(248 8% 41%);
+    --color-potorange: hsl(28 73% 81%);
+    --color-darkgreen: hsl(170 45% 16%);
+    --color-lightgreen: hsl(150 11% 89%);
+    --breakpoint-2lg: 90rem;
+
+    }
+}
