@@ -40,7 +40,6 @@ const activeComponent = computed(() =>
 
       <!--tabs-->
 <!--      <div class="h-full grid content-between">-->
-<!--        <div>-->
       <button
         v-for="tab in tabs"
         :key="tab.name"
@@ -50,7 +49,6 @@ const activeComponent = computed(() =>
         :class="activeTab === tab.name
           ? 'bg-gray-100 text-black'
           : ' text-white'">
-<!--        <span class="text-white border-2 border-white-200">H</span>-->
         <span class="flex gap-4 md:flex-col lg:flex-row items-center">
            <span>
               <component :is="tab.path"
@@ -65,22 +63,16 @@ const activeComponent = computed(() =>
            </span>
         </span>
       </button>
-<!--        </div>-->
         <!--Minimize Menu-->
         <button class="hidden lg:flex h-14 gap-4 pl-8 absolute bottom-10">
           <img class="h-6 w-6" src="@/assets/images/icon-minimize-menu.svg" alt="">
           <span class="text-white">Minimize Menu</span>
         </button>
-<!--      </div>-->
     </aside>
 
     <!-- Main content -->
-<!--  <main class="p-6 overflow-auto order-1 lg:order-2 bg-peach"></main>-->
     <main class="px-6 h-full lg:order-2 bg-peach">
-<!--    <main class="p-6 overflow-auto order-1 lg:order-2 bg-peach">-->
       <component :is="activeComponent" />
-<!--      <div class="w-60 h-60">Hello</div>-->
-<!--      <div>Hello</div>-->
     </main>
   </div>
 </template>

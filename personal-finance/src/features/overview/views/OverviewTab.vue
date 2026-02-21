@@ -26,7 +26,7 @@
 <!--    </section>-->
 <!--  </div>-->
 
-  <div class="flex flex-col gap-8 lg:grid md:gap-4 mb-8 grid-rows-24 grid-cols-12 overflow-auto">
+  <div class="flex flex-col gap-8 pt-6 lg:grid md:gap-4 mb-8 grid-rows-24 grid-cols-12 overflow-auto">
     <h1 class="row-start-1 row-span-2 w-full font-bold text-[32px] justify-start">Overview</h1>
     <numbers-o/>
     <pots-o/>

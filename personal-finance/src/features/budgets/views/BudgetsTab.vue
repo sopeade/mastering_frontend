@@ -10,22 +10,24 @@ import BudgetCard from "@/features/budgets/components/budgetCard.vue";
 </script>
 
 <template>
-  <div class="flex justify-between">
-    <h1>Budgets</h1>
-    <button class="bg-black rounded-lg text-white">
-      <i class="material-icons">add</i>
-      <span>Add New Budget</span>
-    </button>
-  </div>
-  <div class="flex flex-col lg:flex-row gap-6">
-    <div class="flex-2">
-      <graph-b :budget_category="music" :max_spending="0" :color="blue-300"/>
+  <div class="grid gap-8 pt-6">
+    <div class="name-header flex justify-between h-11.25">
+      <h1 class="text-[32px] font-bold">Budgets</h1>
+      <button class="flex items-center px-4 bg-black rounded-lg text-white">
+        <i class="material-icons scale-80">add</i>
+        <span>Add New Budget</span>
+      </button>
     </div>
-    <div class="grid flex-3 gap-6">
-      <budget-card :max_spending="50"/>
-      <budget-card/>
-      <budget-card/>
-      <budget-card/>
+    <div class="flex flex-col lg:flex-row gap-6">
+      <div class="flex-2">
+        <graph-b/>
+      </div>
+      <div class="grid flex-3 gap-6">
+        <budget-card budget_category="music" :max_spending="0" color="bg-blue-300"/>
+        <budget-card budget_category="music" :max_spending="0" color="bg-blue-300"/>
+        <budget-card budget_category="music" :max_spending="0" color="bg-blue-300"/>
+        <budget-card budget_category="music" :max_spending="0" color="bg-blue-300"/>
+      </div>
     </div>
   </div>
 </template>

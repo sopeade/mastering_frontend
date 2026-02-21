@@ -37,11 +37,11 @@ const maxViewedTransactions = 5;
 </script>
 
 <template>
-  <section class="flex flex-col gap-8 min-h-[93vh]">
+  <section class="flex flex-col gap-8 min-h-[93vh] pt-6">
     <h1 class="text-[32px] font-bold">Transactions</h1>
     <div class="body_local flex-1 flex flex-col justify-between gap-6 bg-white px-5 py-6 rounded-2xl">
       <div class="flex flex-col gap-10">
-        <div class="search_bar_local  h-11.25">
+        <div class="search_bar_local h-11.25">
           <div class="flex justify-between">
             <input class="search_icon_local basis-3/4 md:basis-auto md:w-51.25 border rounded-lg border-gray-200"
                    placeholder="Search transaction" type="text">
@@ -61,7 +61,7 @@ const maxViewedTransactions = 5;
         </div>
         <table class="table_local w-full">
             <thead class="hidden md:table-header-group">
-              <tr class="text-left text-gray-400 *:pb-4">
+              <tr class="text-left text-gray-400 *:pb-3">
                 <th class="font-light text-[12px]">Recipient/Sender</th>
                 <th class="font-light text-[12px]">Category</th>
                 <th class="font-light text-[12px]">Transaction Date</th>
@@ -69,7 +69,8 @@ const maxViewedTransactions = 5;
               </tr>
             </thead>
             <tbody class="">
-            <!--Add the gap of top and bottom to height and then give a bottom border to simulate line spacer btw items.            -->
+            <!--Add the gap of top and bottom to height, center with items-center, and then give a bottom border to
+            simulate line spacer btw items.            -->
               <tr class="border-b border-gray-200 h-15 md:h-18 *:py-4"
                   :class="{'border-b-0': idx === transactions.length - 1, 'md:border-t': idx === 0}"
                   v-for="(item, idx) in transactions" :key="item.id">
