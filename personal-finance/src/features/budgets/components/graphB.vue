@@ -9,7 +9,7 @@ const values = ref([320, 450, 300, 500, 420])
 
 
 <template>
-  <section class="flex flex-col md:flex-row lg:flex-col lg:h-139.75 justify-between gap-8 bg-white py-6 px-5 rounded-2xl h-145.75 md:h-86">
+  <section class="flex flex-col md:flex-row lg:flex-col lg:h-139.75 justify-between gap-8 bg-white py-6 px-5 rounded-2xl h-145.75 md:h-86 shadow-cardShadow">
     <DoughnutChart :data="values" :labels="labels" centerText="338" centerLimit="975"/>
     <div class="grid gap-6">
       <h1 class="font-bold text-[20px]">Spending Summary</h1>

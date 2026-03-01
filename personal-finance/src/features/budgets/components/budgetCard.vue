@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import menuBudget from '@/features/budgets/components/editBudgetDropdown.vue';
 
 const props = defineProps({
   budget_category:{
@@ -34,20 +35,18 @@ const items = ref([
    date: '12 Aug 2024',
   },
 ])
-console.log("props.max-spending", props.max_spending)
-console.log("props.color", props.color)
 </script>
 
 
 <template>
-  <section class="grid bg-white rounded-2xl px-5 py-6 h-121.5 min-w-85.75 gap-5">
+  <section class="grid bg-white rounded-2xl px-5 py-6 h-121.5 min-w-85.75 gap-5 shadow-cardShadow">
     <div class="flex h-6 justify-between items-center">
       <div class="flex gap-4 items-center">
         <div class="name-dot h-4 w-4 rounded-full"
         :class="`${props.color}`"></div>
         <p class="font-bold text-[20px]">{{props.budget_category}}</p>
       </div>
-      <img class="h-4 w-4" src="@/assets/images/icon-ellipsis.svg" alt="">
+      <menu-budget/>
     </div>
     <div class="name-max flex flex-col gap-4">
       <p class="text-[14px]">Maximum of ${{props.max_spending}}</p>

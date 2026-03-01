@@ -3,9 +3,12 @@ import searchIcon from '@/assets/images/icon-search.svg';
 import Pagination from "@/components/Pagination.vue";
 import {ref} from "vue";
 import {showSign} from "@/utils/helpers.ts";
+import dropdown from "@/components/dropdown.vue"
+import {sortArr} from "@/utils/helpers.ts";
 
 const currentPage = ref(1);
 const onPageChange = (page) => { currentPage.value = page}
+// const sortArr = ["Latest", "Oldest", "A to Z", "Z to A", "Highest", "Lowest"];
 
 const transactions = ref([
   {'name': 'Emma Richardson',
@@ -37,24 +40,27 @@ const maxViewedTransactions = 5;
 </script>
 
 <template>
-  <section class="flex flex-col gap-8 min-h-[93vh] pt-6">
+  <section class="flex flex-col gap-8 min-h-[93vh] lg:min-h-full pt-6">
     <h1 class="text-[32px] font-bold">Transactions</h1>
-    <div class="body_local flex-1 flex flex-col justify-between gap-6 bg-white px-5 py-6 rounded-2xl">
+    <div class="body_local flex-1 flex flex-col justify-between gap-6 bg-white overflow-hidden px-5 py-6 rounded-2xl shadow-cardShadow">
       <div class="flex flex-col gap-10">
         <div class="search_bar_local h-11.25">
           <div class="flex justify-between">
-            <input class="search_icon_local basis-3/4 md:basis-auto md:w-51.25 border rounded-lg border-gray-200"
+            <input class="search_icon_local basis-3/4 md:basis-auto md:w-51.25 cursor-pointer
+            border rounded-lg border-gray-200 hover:outline-1 hover:outline-[#696868]"
                    placeholder="Search transaction" type="text">
             <img class="md:hidden self-center w-5 h-5" src="@/assets/images/icon-sort-mobile.svg" alt="">
             <img class="md:hidden self-center w-5 h-5" src="@/assets/images/icon-filter-mobile.svg" alt="">
             <div class="search_labels_local hidden md:flex gap-5">
               <div class="flex gap-2">
                 <label class="self-center text-[14px]" for="sort">Sort by</label>
-                <input class="w-30 border rounded-lg border-gray-200" type="text" id="sort">
+                <dropdown :items="sortArr" select-width="7.5rem" select-height="45px"
+                          select-focus-border="1px solid #696868" select-border="1px solid #e5e7eb" id="sort"/>
               </div>
               <div class="flex basis-1/12 gap-2">
                 <label class="self-center text-[14px]" for="category">Category</label>
-                <input class="w-44 border rounded-lg border-gray-200" type="text" id="category">
+                <dropdown class="pr-10" :items="sortArr" select-width="11rem" select-height="45px"
+                          select-focus-border="1px solid #696868" select-border="1px solid #e5e7eb" id="category"/>
               </div>
             </div>
           </div>
@@ -104,6 +110,12 @@ const maxViewedTransactions = 5;
   background-repeat: no-repeat;
   background-position: right 20px center;
   padding: 10px 20px;
+}
+
+.dropdown_local {
+  background-image: url('src/assets/images/icon-caret-down.svg');
+  background-repeat: no-repeat;
+  background-position: right 20px center;
 }
 </style>
 # --------- Inline style equivalent

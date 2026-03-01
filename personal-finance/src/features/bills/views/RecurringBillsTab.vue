@@ -1,5 +1,7 @@
 <script setup>
 import {ref} from "vue";
+import Dropdown from "@/components/dropdown.vue";
+import {sortArr} from "@/utils/helpers.ts";
 
 const bills = ref([
   {'name': 'Elevate Education',
@@ -43,7 +45,7 @@ const bills = ref([
             <p class="font-bold text-[32px]">$384.98</p>
           </div>
         </div>
-        <div class="flex-1 lg:flex-none bg-white rounded-xl p-5">
+        <div class="flex-1 lg:flex-none bg-white rounded-xl p-5 shadow-cardShadow">
           <p class="text-[16px]">Summary</p>
           <p class="flex justify-between items-center h-12.5 border-b border-gray-200">
             <span class="text-[12px]">Paid Bills</span>
@@ -59,14 +61,17 @@ const bills = ref([
           </p>
         </div>
       </div>
-      <div class="grid gap-6 lg:flex-3 bg-white px-5 py-6 rounded-xl">
+      <div class="grid gap-6 lg:flex-3 bg-white px-5 py-6 rounded-xl shadow-cardShadow">
         <div class="search_sort_bar_local flex items-center justify-between gap-6 h-11.25">
-          <input class="search_icon_local basis-4/5 md:basis-1/2 h-full border rounded-lg border-gray-200"
+          <input class="search_icon_local basis-4/5 md:basis-1/2 cursor-pointer h-full
+          border rounded-lg border-gray-200 hover:outline-1 hover:outline-[#696868]"
                  placeholder="Search bills" type="text">
           <img class="h-5 w-5 md:hidden" src="@/assets/images/icon-sort-mobile.svg" alt="">
           <div class="hidden md:flex gap-2 h-full">
             <label class="self-center text-[14px]" for="sort">Sort by</label>
-            <input class="w-30 border rounded-lg border-gray-200" type="text" id="sort">
+            <dropdown :items="sortArr" select-width="7.5rem" select-height="45px"
+                      select-focus-border="1px solid #696868" select-border="1px solid #e5e7eb" id="sort"/>
+<!--            <input class="w-30 border rounded-lg border-gray-200" type="text" id="sort">-->
           </div>
         </div>
         <table class="w-full">

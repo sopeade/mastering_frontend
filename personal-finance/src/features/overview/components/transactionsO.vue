@@ -26,13 +26,14 @@ const maxViewedTransactions = 5;
 </script>
 
 <template>
-  <section class="grid bg-white rounded-2xl px-5 py-6 lg:row-start-11 lg:row-span-13  lg:col-start-1 lg:col-span-7">
+  <section class="grid bg-white rounded-2xl px-5 py-6 lg:row-start-11 lg:row-span-13  lg:col-start-1 lg:col-span-7
+              shadow-cardShadow">
     <div class="flex justify-between mb-8">
       <h1 class="font-bold text-[20px]">Transactions</h1>
-      <p class="flex gap-3">
-          <span>
-            View All
-          </span>
+      <p class="flex gap-3 cursor-pointer">
+        <span>
+          View All
+        </span>
         <span class="flex max-h-6">
             <img class="h-3 self-center" src="@/assets/images/icon-caret-right.svg" alt="">
         </span>

@@ -66,6 +66,7 @@
     --color-darkgreen: hsl(170 45% 16%);
     --color-lightgreen: hsl(150 11% 89%);
     --breakpoint-2lg: 90rem;
-
+    /*--shadow-cardShadow: 1px 0px 3px 1px hsla(0 0 0 / 0.23), 0 1px 0px rgba(60 64 67 / 0.1);*/
+    --shadow-cardShadow: 0px 1px 2px 1px hsla(0 0 0 / 0.13);
     }
 }

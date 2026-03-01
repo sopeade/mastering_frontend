@@ -158,7 +158,6 @@ onBeforeUnmount(() => {
       <div class="w-45 h-45 bg-[rgba(255,255,255,0.257)] border border-[rgba(255,255,255,0.15)]
            rounded-full shadow-[3px_3px_3px_rgba(0,0,0,0.089)]
            mask-[radial-gradient(circle,transparent_57%,black_58%,black_100%)]">
-<!--        <h1 class="grid justify-center">My name</h1>-->
       </div>
     </div>
   </div>

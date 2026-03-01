@@ -14,16 +14,16 @@
 
 <template>
   <section class="lg:grid bg-white rounded-2xl px-5 py-6 overflow-auto
-  lg:row-start-6 lg:row-span-9 lg:h-full lg:col-start-8 lg:col-span-full">
+  lg:row-start-6 lg:row-span-9 lg:h-full lg:col-start-8 lg:col-span-full shadow-cardShadow">
     <div class="flex justify-between">
       <h1 class="font-bold text-[20px]">Budgets</h1>
-      <p class="flex gap-3">
-            <span>
-              See Details
-            </span>
+      <p class="flex gap-3 cursor-pointer">
+        <span>
+          See Details
+        </span>
         <span class="flex h-6">
-              <img class="h-3 self-center" src="@/assets/images/icon-caret-right.svg" alt="">
-            </span>
+          <img class="h-3 self-center" src="@/assets/images/icon-caret-right.svg" alt="">
+        </span>
       </p>
     </div>
     <div class="flex flex-col md:flex-row md:justify-between">
