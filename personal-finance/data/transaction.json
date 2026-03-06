@@ -1,0 +1,124 @@
+{
+  "transactions": [
+    {
+      "name": "Emma Richardson",
+      "category": "personal Care",
+      "amount": 75.50,
+      "date": "19/08/2024"
+    },
+    {
+      "name": "Savory Bites Bistro",
+      "category": "personal Care",
+      "amount": 75.50,
+      "date": "19/08/2024"
+    },
+    {
+      "name": "Daniel Carter",
+      "category": "personal Care",
+      "amount": -75.50,
+      "date": "19/08/2024"
+    },
+    {
+      "name": "Sun Park",
+      "category": "personal Care",
+      "amount": 75.50,
+      "date": "19/08/2024"
+    },
+    {
+      "name": "Urban Services Hub",
+      "category": "personal Care",
+      "amount": 75.50,
+      "date": "19/08/2024"
+    },
+    {
+      "name": "whats good",
+      "category": "personal Care",
+      "amount": -5.20,
+      "date": "29/09/2020"
+    },
+    {
+      "name": "Savory Bites Bistro",
+      "category": "personal Care",
+      "amount": 75.50,
+      "date": "19/08/2024"
+    },
+    {
+      "name": "Daniel Carter",
+      "category": "personal Care",
+      "amount": -75.50,
+      "date": "19/08/2024"
+    },
+    {
+      "name": "Sun Park",
+      "category": "personal Care",
+      "amount": 75.50,
+      "date": "19/08/2024"
+    },
+    {
+      "name": "Urban Services Hub",
+      "category": "personal Care",
+      "amount": 75.50,
+      "date": "19/08/2024"
+    },
+    {
+      "name": "whats good",
+      "category": "personal Care",
+      "amount": -5.20,
+      "date": "29/09/2020"
+    },
+    {
+      "name": "Sun Park",
+      "category": "personal Care",
+      "amount": 75.50,
+      "date": "19/08/2024"
+    },
+    {
+      "name": "Urban Services Hub",
+      "category": "personal Care",
+      "amount": 75.50,
+      "date": "19/08/2024"
+    },
+    {
+      "name": "whats good",
+      "category": "personal Care",
+      "amount": -5.20,
+      "date": "29/09/2020"
+    },
+    {
+      "name": "Emma Richardson",
+      "category": "personal Care",
+      "amount": 75.50,
+      "date": "19/08/2024"
+    },
+    {
+      "name": "Savory Bites Bistro",
+      "category": "personal Care",
+      "amount": 75.50,
+      "date": "19/08/2024"
+    },
+    {
+      "name": "Daniel Carter",
+      "category": "personal Care",
+      "amount": -75.50,
+      "date": "19/08/2024"
+    },
+    {
+      "name": "Sun Park",
+      "category": "personal Care",
+      "amount": 75.50,
+      "date": "19/08/2024"
+    },
+    {
+      "name": "Urban Services Hub",
+      "category": "personal Care",
+      "amount": 75.50,
+      "date": "19/08/2024"
+    },
+    {
+      "name": "whats good",
+      "category": "personal Care",
+      "amount": -5.20,
+      "date": "29/09/2020"
+    }
+  ]
+}

@@ -1,34 +1,22 @@
 <script setup>
-import {ref} from "vue";
+import { ref, onMounted, onUnmounted} from "vue";
 import Dropdown from "@/components/dropdown.vue";
-import {sortArr} from "@/utils/helpers.ts";
+import { sortArr } from "@/utils/helpers.ts";
+import { useBillsStore } from "@/features/bills/store/useBillsStore.ts";
+import { storeToRefs } from "pinia";
 
-const bills = ref([
-  {'name': 'Elevate Education',
-    'category': 'personal Care',
-    'amount': 75.50,
-    'date': '19/08/2024'},
-  {'name': 'Bravo Zen Spa',
-    'category': 'personal Care',
-    'amount': 75.50,
-    'date': '19/08/2024'},
-  {'name': 'Charlie Electric Company',
-    'category': 'personal Care',
-    'amount': -75.50,
-    'date': '19/08/2024'},
-  {'name': 'Delta Taxi',
-    'category': 'personal Care',
-    'amount': 75.50,
-    'date': '19/08/2024'},
-  {'name': 'Urban Services Hub',
-    'category': 'personal Care',
-    'amount': 75.50,
-    'date': '19/08/2024'},
-  {'name': 'whats good',
-    'category': 'personal Care',
-    'amount': -5.20,
-    'date': '29/09/2020'},
-])
+const store = useBillsStore();
+const { bills } = storeToRefs(store);
+
+// console.log("Bills data smtime during/before fetch: ", bills.value)
+onMounted(async () => {
+  await store.getBills();
+  console.log("bills data after fetch: ", bills.value)
+})
+
+onUnmounted(() => {
+  console.log("Bills is unmounted")
+})
 </script>
 
 <template>
@@ -64,14 +52,13 @@ const bills = ref([
       <div class="grid gap-6 lg:flex-3 bg-white px-5 py-6 rounded-xl shadow-cardShadow">
         <div class="search_sort_bar_local flex items-center justify-between gap-6 h-11.25">
           <input class="search_icon_local basis-4/5 md:basis-1/2 cursor-pointer h-full
-          border rounded-lg border-gray-200 hover:outline-1 hover:outline-[#696868]"
+          border rounded-lg border-[#696868] hover:border-black"
                  placeholder="Search bills" type="text">
           <img class="h-5 w-5 md:hidden" src="@/assets/images/icon-sort-mobile.svg" alt="">
           <div class="hidden md:flex gap-2 h-full">
             <label class="self-center text-[14px]" for="sort">Sort by</label>
             <dropdown :items="sortArr" select-width="7.5rem" select-height="45px"
-                      select-focus-border="1px solid #696868" select-border="1px solid #e5e7eb" id="sort"/>
-<!--            <input class="w-30 border rounded-lg border-gray-200" type="text" id="sort">-->
+                      id="sort"/>
           </div>
         </div>
         <table class="w-full">
@@ -92,11 +79,11 @@ const bills = ref([
                 </div>
 
                 <div class="flex h-full md:hidden justify-between">
-                  <p>x</p>
+                  <p>{{bill.date}}</p>
                   <p>{{bill.amount}}</p>
                 </div>
               </td>
-              <td class="hidden md:table-cell">x</td>
+              <td class="hidden md:table-cell">{{bill.date}}</td>
               <td class="hidden md:table-cell text-right">{{bill.amount}}</td>
 
             </tr>

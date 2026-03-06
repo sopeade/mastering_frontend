@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-
+// https://www.digitalocean.com/community/tutorials/vuejs-vue-pagination-component
 const props = defineProps({
   maxVisibleButtons: {
     type: Number,
@@ -28,7 +28,8 @@ const startPage = computed(() => {
     return 1;
   }
   //Last Page.
-  if (props.currentPage >= props.totalPages - Math.floor(props.maxVisibleButtons/2)){
+  if (props.currentPage >= props.totalPages - Math.floor(props.maxVisibleButtons/2) &&
+      props.currentPage > props.maxVisibleButtons){
     return props.totalPages - props.maxVisibleButtons + 1;
   }
   //Any Middle Page
@@ -87,7 +88,7 @@ const onClickLastPage     = () => { emit('pageChanged', props.totalPages)}
 
       <div class="flex border border-gray-400 rounded-lg">
         <button
-            class="flex w-12 h-10 gap-4 md:w-23.25 justify-center"
+            class="flex w-12 h-10 gap-4 md:w-23.25 justify-center hover:bg-[#98908b]"
           type="button"
           @click="onClickPreviousPage"
           :disabled="isInFirstPage"
@@ -105,11 +106,11 @@ const onClickLastPage     = () => { emit('pageChanged', props.totalPages)}
       <div class="flex w-10 h-full rounded-xl"
            v-for="page in pages">
         <button
-          type="button"
-          :class="{ active: isPageActive(page.number) }"
           @click="onClickPage(page.number)"
+          class="w-full border border-gray-400 rounded-lg mx-auto hover:bg-[#98908b]"
+          :class="{ active: isPageActive(page.number) }"
           :disabled="page.isDisabled"
-          class="w-full border border-gray-400 rounded-lg mx-auto"
+          type="button"
         >
           {{ page.number }}
         </button>
@@ -119,7 +120,7 @@ const onClickLastPage     = () => { emit('pageChanged', props.totalPages)}
     <li class="flex gap-4">
       <div class="flex border border-gray-400 rounded-lg">
         <button
-          class="flex w-12 h-10 gap-4 md:w-23.25 justify-center"
+          class="flex w-12 h-10 gap-4 md:w-23.25 justify-center hover:bg-[#98908b]"
           type="button"
           @click="onClickNextPage"
           :disabled="isInLastPage"

@@ -1,5 +1,16 @@
 <script setup>
   import coloredItems from "@/features/overview/components/coloredItems.vue"
+  import {onMounted, onUnmounted} from "vue";
+  import {useOverviewStore} from "@/features/overview/store/useOverviewStore.ts";
+  import {storeToRefs} from "pinia";
+
+  const store = useOverviewStore();
+  const { getPots } = store;
+  const { potsSummary } = storeToRefs(store);
+  onMounted(async() => {
+    await getPots();
+  })
+
 </script>
 
 <template>
@@ -23,19 +34,21 @@
           <img class="h-10 w-10 ml-4" src="@/assets/images/icon-pot.svg" alt="">
           <div class="grid gap-3">
             <p class="text-[14px]">Total Saved</p>
-            <h1 class="text-[32px] font-bold">$850</h1>
+<!--            <h1 class="text-[32px] font-bold">$850</h1>-->
+            <h1 class="text-[32px] font-bold">${{potsSummary.total}}</h1>
           </div>
         </div>
-        <colored-items>
-          <template #item1>Savings</template>
-          <template #sum1>$159</template>
-          <template #item2>Gift</template>
-          <template #sum2>$40</template>
-          <template #item3>Concert Ticket</template>
-          <template #sum3>$110</template>
-          <template #item4>New Laptop</template>
-          <template #sum4>$10</template>
-        </colored-items>
+<!--        <colored-items>-->
+<!--          <template #item1>{{potsSummary.items[0]}}</template>-->
+<!--          <template #sum1>$159</template>-->
+<!--          <template #item2>Gift</template>-->
+<!--          <template #sum2>$40</template>-->
+<!--          <template #item3>Concert Ticket</template>-->
+<!--          <template #sum3>$110</template>-->
+<!--          <template #item4>New Laptop</template>-->
+<!--          <template #sum4>$10</template>-->
+<!--        </colored-items>-->
+        <colored-items :items="potsSummary.items"/>
       </div>
     </div>
   </section>

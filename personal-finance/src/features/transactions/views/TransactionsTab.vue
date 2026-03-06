@@ -1,42 +1,44 @@
 <script setup>
 import searchIcon from '@/assets/images/icon-search.svg';
 import Pagination from "@/components/Pagination.vue";
-import {ref} from "vue";
+import {computed, ref, onUnmounted, onMounted} from "vue";
 import {showSign} from "@/utils/helpers.ts";
 import dropdown from "@/components/dropdown.vue"
 import {sortArr} from "@/utils/helpers.ts";
+import { useTransactionStore } from "@/features/transactions/store/useTransactionStore.ts";
+import {storeToRefs} from "pinia";
+
+const store = useTransactionStore();
+const { transactions } = storeToRefs(store);
 
 const currentPage = ref(1);
+const perPage = ref(15);
+
+const paginatedData = computed(() => {
+  const start = (currentPage.value - 1) * perPage.value;
+  const end   = start + perPage.value;
+  return transactions.value.slice(start, end);
+})
+
+onMounted(async () => {
+  console.log("Transactions Tab mounted")
+  await store.getTransactions();
+  console.log("transactions.value", transactions.value)
+})
+
 const onPageChange = (page) => { currentPage.value = page}
 // const sortArr = ["Latest", "Oldest", "A to Z", "Z to A", "Highest", "Lowest"];
 
-const transactions = ref([
-  {'name': 'Emma Richardson',
-    'category': 'personal Care',
-    'amount': 75.50,
-    'date': '19/08/2024'},
-  {'name': 'Savory Bites Bistro',
-    'category': 'personal Care',
-    'amount': 75.50,
-    'date': '19/08/2024'},
-  {'name': 'Daniel Carter',
-    'category': 'personal Care',
-    'amount': -75.50,
-    'date': '19/08/2024'},
-  {'name': 'Sun Park',
-    'category': 'personal Care',
-    'amount': 75.50,
-    'date': '19/08/2024'},
-  {'name': 'Urban Services Hub',
-    'category': 'personal Care',
-    'amount': 75.50,
-    'date': '19/08/2024'},
-  {'name': 'whats good',
-    'category': 'personal Care',
-    'amount': -5.20,
-    'date': '29/09/2020'},
-])
+onUnmounted(() => {
+  console.log("Transaction is unmounted!!!!!")
+})
+
+
 const maxViewedTransactions = 5;
+
+const totalPages = computed(() => {
+  return Math.ceil(transactions.value.length/perPage.value)
+})
 </script>
 
 <template>
@@ -47,7 +49,7 @@ const maxViewedTransactions = 5;
         <div class="search_bar_local h-11.25">
           <div class="flex justify-between">
             <input class="search_icon_local basis-3/4 md:basis-auto md:w-51.25 cursor-pointer
-            border rounded-lg border-gray-200 hover:outline-1 hover:outline-[#696868]"
+            border rounded-lg border-[#696868] hover:border hover:border-black"
                    placeholder="Search transaction" type="text">
             <img class="md:hidden self-center w-5 h-5" src="@/assets/images/icon-sort-mobile.svg" alt="">
             <img class="md:hidden self-center w-5 h-5" src="@/assets/images/icon-filter-mobile.svg" alt="">
@@ -55,12 +57,12 @@ const maxViewedTransactions = 5;
               <div class="flex gap-2">
                 <label class="self-center text-[14px]" for="sort">Sort by</label>
                 <dropdown :items="sortArr" select-width="7.5rem" select-height="45px"
-                          select-focus-border="1px solid #696868" select-border="1px solid #e5e7eb" id="sort"/>
+                          id="sort"/>
               </div>
               <div class="flex basis-1/12 gap-2">
                 <label class="self-center text-[14px]" for="category">Category</label>
-                <dropdown class="pr-10" :items="sortArr" select-width="11rem" select-height="45px"
-                          select-focus-border="1px solid #696868" select-border="1px solid #e5e7eb" id="category"/>
+                <dropdown class="" :items="sortArr" select-width="11rem" select-height="45px"
+                          id="category"/>
               </div>
             </div>
           </div>
@@ -78,8 +80,8 @@ const maxViewedTransactions = 5;
             <!--Add the gap of top and bottom to height, center with items-center, and then give a bottom border to
             simulate line spacer btw items.            -->
               <tr class="border-b border-gray-200 h-15 md:h-18 *:py-4"
-                  :class="{'border-b-0': idx === transactions.length - 1, 'md:border-t': idx === 0}"
-                  v-for="(item, idx) in transactions" :key="item.id">
+                  :class="{'border-b-0': idx === paginatedData.length - 1, 'md:border-t': idx === 0}"
+                  v-for="(item, idx) in paginatedData" :key="item.id">
                 <td class="flex gap-3 md:gap-4">
                   <img class="h-8 w-8 border rounded-full" src="@/assets/images/icon-pot.svg" alt="">
                   <div class="flex flex-col justify-center">
@@ -98,7 +100,7 @@ const maxViewedTransactions = 5;
         </table>
       </div>
 
-      <Pagination :currentPage=currentPage :perPage=10 :totalPages=10 @pageChanged="onPageChange"/>
+      <Pagination :currentPage=currentPage :perPage=perPage :totalPages=totalPages @pageChanged="onPageChange"/>
     </div>
   </section>
 </template>

@@ -168,7 +168,7 @@ onBeforeUnmount(()=>{
             @blur="isFocus=false"
             aria-labelledby="label"
             :style="{fontSize:props.selectFontSize, backgroundColor: props.selectBgColor,
-            'max-width': props.selectWidth, height: props.selectHeight, border: isFocus? props.selectFocusBorder : props.selectBorder,
+            width: props.selectWidth, height: props.selectHeight, border: isFocus? props.selectFocusBorder : props.selectBorder,
             borderRadius: props.selectBorderRadius, paddingInline: props.selectPaddingX, paddingBlock: props.selectPaddingY}">
       <option value="sel" disabled="" selected="">Select role...</option>
       <option v-for="(item, idx) in props.items"

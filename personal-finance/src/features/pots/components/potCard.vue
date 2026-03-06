@@ -3,27 +3,33 @@ import { ref } from 'vue';
 import menuPot from '@/features/pots/components/editPotDropdown.vue';
 import withdraw from '@/features/pots/components/withdraw.vue';
 import deposit from '@/features/pots/components/deposit.vue';
+import {toPercent} from "@/utils/helpers.ts";
 
 const isWithdraw = ref(false);
 const isAdd = ref(false);
-
 const props = defineProps({
-  potName:{
+  name:{
     type: String,
     required: false,
     default: 'Entertainment',
   },
+  saved:{
+    type: Number,
+    required: false,
+    default: 0
+  },
   target:{
     type: Number,
     required: false,
+    default: 0
   },
+
   color:{
     type: String,
     required: false,
     default: 'bg-blue-300'
   },
 })
-console.log(props.color)
 </script>
 
 <template>
@@ -32,14 +38,14 @@ console.log(props.color)
       <div class="flex gap-4 items-center">
         <div class="name-dot h-4 w-4 rounded-full"
            :class="`${props.color}`"></div>
-        <p class="font-bold text-[20px]">{{props.potName}}</p>
+        <p class="font-bold text-[20px]">{{props.name}}</p>
       </div>
       <menu-pot/>
     </div>
     <div class="grid gap-4">
       <p class="flex justify-between">
         <span>Total Saved</span>
-        <span class="font-bold text-[32px]">$159</span>
+        <span class="font-bold text-[32px]">${{props.saved}}</span>
       </p>
       <div class="grid gap-3">
         <div class="h-2 rounded-lg bg-peach">
@@ -48,8 +54,8 @@ console.log(props.color)
           </transition>
         </div>
         <p class="flex justify-between">
-          <span>7.95%</span>
-          <span>Target of $2,000</span>
+          <span>{{toPercent(props.saved, props.target)}}%</span>
+          <span>Target of ${{props.target}}</span>
         </p>
       </div>
     </div>

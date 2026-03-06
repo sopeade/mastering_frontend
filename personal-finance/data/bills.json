@@ -1,0 +1,28 @@
+{
+  "bills": [
+    {"name": "Pixel Playground",
+      "date": "Monthly-11th",
+      "amount": 10.00
+    },
+    {"name": "Nimbus Data Storage",
+      "date": "Monthly-21st",
+      "amount": -9.99
+    },
+    {"name": "Ella Phillips",
+      "date": "10 Aug 2024",
+      "amount": -45.00
+    },
+    {"name": "Spark Electric Solutions",
+      "date": "Monthly-2nd",
+      "amount": -55.00
+    },
+    {"name": "Serenity Spa & Wellness",
+      "date": "Monthly 3rd",
+      "amount": 100.00
+    },
+    {"name": "Elevate Education",
+      "date": "Monthly-4th",
+      "amount": 50.00
+    }
+  ]
+}

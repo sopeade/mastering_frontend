@@ -1,18 +1,30 @@
 <script setup>
-import {onUpdated, ref} from 'vue';
+import {onUpdated, ref, onMounted, onUnmounted} from 'vue';
 import GraphB from "@/features/budgets/components/graphB.vue";
 import BudgetCard from "@/features/budgets/components/budgetCard.vue";
-// import billsCard from "@/features/budgets/components/billsB.vue";
 import AddBudget from "@/features/budgets/components/addBudget.vue";
 
-const isAddBudget = ref(false);
-onUpdated(() => {
-  console.log("isAddBudget", isAddBudget.value)
+import { useBudgetsStore } from "@/features/budgets/store/useBudgetsStore.ts";
+import { storeToRefs } from "pinia";
+
+const store = useBudgetsStore();
+const { budgets } = storeToRefs(store);
+
+// console.log("Budgets data smtime during/before fetch: ", budgets.value)
+onMounted(async () => {
+  console.log("budgets tab mounted")
+  await store.getBudgets();
+  console.log("Budgetsdata after fetch: ", budgets.value)
 })
+const isAddBudget = ref(false);
+
 const showAddBudget = () => {
   console.log("showAddBudget")
   isAddBudget.value = true
 }
+onUnmounted(() => {
+  console.log("Budgets Tab Unmounted")
+})
 </script>
 
 <template>
@@ -29,10 +41,12 @@ const showAddBudget = () => {
         <graph-b/>
       </div>
       <div class="grid flex-3 gap-6">
-        <budget-card budget_category="music" :max_spending="0" color="bg-blue-300"/>
-        <budget-card budget_category="art" :max_spending="0" color="bg-blue-300"/>
-        <budget-card budget_category="science" :max_spending="0" color="bg-blue-300"/>
-        <budget-card budget_category="life" :max_spending="0" color="bg-blue-300"/>
+        <budget-card
+            v-for="(budget, idx) in budgets" :key="budget.idx"
+            :category="budget.category" :max="budget.max" :items="budget.items"
+            :spent="budget.spent" :remaining="budget.remaining" color="bg-blue-300"/>
+
+<!--        <budget-card budget_category="music" :max_spending="0" color="bg-blue-300"/>-->
       </div>
     </div>
   </section>

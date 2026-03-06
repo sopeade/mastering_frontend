@@ -1,7 +1,17 @@
 <script setup>
-  import { ref } from 'vue';
+import {onMounted, ref} from 'vue';
   import DoughnutChart from "@/components/DoughnutChart.vue";
   import coloredItems from "@/features/overview/components/coloredItems.vue"
+  import {useOverviewStore} from "@/features/overview/store/useOverviewStore.ts";
+  import {storeToRefs} from "pinia";
+
+  const store = useOverviewStore();
+  const { getBudgets } = store;
+  const { budgetsSummary } = storeToRefs(store);
+
+  onMounted(async() => {
+    await getBudgets();
+  })
 
   const labels = ref(['Jan', 'Feb', 'Mar', 'Apr', 'May'])
   const values = ref([320, 450, 300, 500, 420])
@@ -27,18 +37,24 @@
       </p>
     </div>
     <div class="flex flex-col md:flex-row md:justify-between">
-      <DoughnutChart :data="values" :labels="labels" centerText="338" centerLimit="975"/>
+      <DoughnutChart :data="values" :labels="labels"
+                     :centerText="budgetsSummary.spent.toString()"
+                     :centerLimit="budgetsSummary.limit.toString()"/>
 <!--      <div>hello</div>-->
-      <colored-items :vertical=true>
-        <template #item1>Entertainment</template>
-        <template #sum1>$50.00</template>
-        <template #item2>Bills</template>
-        <template #sum2>$750.00</template>
-        <template #item3>Dining Out</template>
-        <template #sum3>$75.00</template>
-        <template #item4>Personal Care</template>
-        <template #sum4>$100.00</template>
-      </colored-items>
+<!--      <colored-items :vertical=true>-->
+<!--        <template #item1>Entertainment</template>-->
+<!--        <template #sum1>$50.00</template>-->
+<!--        <template #item2>Bills</template>-->
+<!--        <template #sum2>$750.00</template>-->
+<!--        <template #item3>Dining Out</template>-->
+<!--        <template #sum3>$75.00</template>-->
+<!--        <template #item4>Personal Care</template>-->
+<!--        <template #sum4>$100.00</template>-->
+<!--      </colored-items>-->
+      <colored-items
+          :items="budgetsSummary.items"
+          :vertical="true"
+      />
 
     </div>
 

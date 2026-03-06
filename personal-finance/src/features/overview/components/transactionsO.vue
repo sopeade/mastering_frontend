@@ -1,27 +1,37 @@
 <script setup>
 import { ref, computed } from 'vue';
 import {showSign} from "@/utils/helpers.ts";
+import { useTransactionStore } from "@/features/transactions/store/useTransactionStore.ts";
+import {storeToRefs} from "pinia";
 
-const transactions = ref([
-  {'name': 'Emma Richardson',
-      'amount': 75.50,
-      'date': '19/08/2024'},
-  {'name': 'Savory Bites Bistro',
-      'amount': 75.50,
-      'date': '19/08/2024'},
-  {'name': 'Daniel Carter',
-      'amount': -75.50,
-      'date': '19/08/2024'},
-  {'name': 'Sun Park',
-      'amount': 75.50,
-      'date': '19/08/2024'},
-  {'name': 'Urban Services Hub',
-      'amount': 75.50,
-      'date': '19/08/2024'},
-  {'name': 'whats good',
-    'amount': -5.20,
-    'date': '29/09/2020'},
-])
+const store = useTransactionStore();
+const { transactions } = storeToRefs(store);
+const props = defineProps({
+  data: {
+    type: Object,
+    required: false,
+  }
+})
+// const transactions = ref([
+//   {'name': 'Emma Richardson',
+//       'amount': 75.50,
+//       'date': '19/08/2024'},
+//   {'name': 'Savory Bites Bistro',
+//       'amount': 75.50,
+//       'date': '19/08/2024'},
+//   {'name': 'Daniel Carter',
+//       'amount': -75.50,
+//       'date': '19/08/2024'},
+//   {'name': 'Sun Park',
+//       'amount': 75.50,
+//       'date': '19/08/2024'},
+//   {'name': 'Urban Services Hub',
+//       'amount': 75.50,
+//       'date': '19/08/2024'},
+//   {'name': 'whats good',
+//     'amount': -5.20,
+//     'date': '29/09/2020'},
+// ])
 const maxViewedTransactions = 5;
 </script>
 

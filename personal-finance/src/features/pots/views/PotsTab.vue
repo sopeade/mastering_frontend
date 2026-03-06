@@ -1,9 +1,20 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import potCard from "@/features/pots/components/potCard.vue";
 import AddPot from "@/features/pots/components/addPot.vue";
-import AddBudget from "@/features/budgets/components/addBudget.vue";
 
+import { usePotsStore } from "@/features/pots/store/usePotsStore.ts";
+import { storeToRefs } from "pinia";
+
+const store = usePotsStore();
+const { pots } = storeToRefs(store);
+console.log("mypot is", pots.value)
+// console.log("Pots data smtime during/before fetch: ", pots.value)
+onMounted(async () => {
+  console.log("Pots Tab mounted")
+  await store.getPots();
+  console.log("Potsdata after fetch: ", pots.value)
+})
 const isAddPot = ref(false);
 const showAddPot = () => {
   console.log("showAddPot")
@@ -21,11 +32,9 @@ const showAddPot = () => {
       </button>
     </div>
     <div class="flex flex-col lg:flex-row lg:flex-wrap gap-6">
-      <pot-card pot-name="myname" :target=2000 color="bg-green-500"/>
-      <pot-card pot-name="myname" :target=2000 color="bg-blue-500"/>
-      <pot-card pot-name="myname" :target=2000 color="bg-red-500"/>
-      <pot-card pot-name="myname" :target=2000 color="bg-green-500"/>
-      <pot-card pot-name="myname" :target=2000 color="bg-green-500"/>
+      <pot-card
+          v-for="(pot, idx) in pots" :key="pot.idx"
+          :name="pot.name" :target="pot.target" :saved="pot.saved" color="bg-green-500"/>
     </div>
   </section>
   <add-pot v-if="isAddPot" @close-modal="isAddPot=false"/>

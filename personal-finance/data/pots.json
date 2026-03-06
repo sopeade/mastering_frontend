@@ -1,0 +1,40 @@
+{
+  "pots": [
+    {
+      "id": 0,
+      "name": "Savings",
+      "target": 2000,
+      "color": "green",
+      "saved": 159.00
+    },
+    {
+      "id": 1,
+      "name": "Concert Ticket",
+      "target": 150,
+      "color": "gray",
+      "saved": 110.00
+    },
+    {
+      "id": 2,
+      "name": "Gift",
+      "target": 60,
+      "color": "cyan",
+      "saved": 40.00
+    },
+    {
+
+      "id": 3,
+      "name": "New Laptop",
+      "target": 1000,
+      "color": "orange",
+      "saved": 10.00
+    },
+    {
+      "id": 4,
+      "name": "Holiday",
+      "target": 1440,
+      "color": "purple",
+      "saved": 531.00
+    }
+  ]
+}

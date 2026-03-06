@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, defineAsyncComponent } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import OverviewTab from '@/features/overview/views/OverviewTab.vue';
 import TransactionsTab from '@/features/transactions/views/TransactionsTab.vue'
 import BudgetsTab from '@/features/budgets/views/BudgetsTab.vue'
@@ -10,8 +10,18 @@ import transactionIcon from '@/features/transactions/components/icons/transactio
 import BudgetIcon from '@/features/budgets/components/icons/budgetIcon.vue';
 import potsIcon from '@/features/pots/components/icons/pots.vue';
 import recurringIcon from '@/features/bills/components/icons/bills.vue';
+import { useBudgetsStore } from "@/features/budgets/store/useBudgetsStore.ts";
+import { storeToRefs } from "pinia";
 
 const activeTab = ref('overview')
+const store = useBudgetsStore();
+// const { budgets } = storeToRefs(store);
+
+// console.log("overview data smtime during/before fetch: ", budgets.value)
+onMounted(async () => {
+  console.log("Dashboardview mounted")
+  // console.log("Dashboard budget data after fetch: ", budgets.value)
+})
 
 const tabs = [
   { name: 'overview', component: OverviewTab, icon: overviewIcon},
@@ -73,7 +83,9 @@ const activeComponent = computed(() =>
 
     <!-- Main content -->
     <main class="px-6 h-full lg:order-2 bg-peach overflow-y-auto">
-      <component :is="activeComponent" />
+      <keep-alive exclude="OverviewTab" :max="3">
+        <component :is="activeComponent" />
+      </keep-alive>
     </main>
   </div>
 </template>

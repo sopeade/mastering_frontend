@@ -1,10 +1,10 @@
 <script setup>
   import { onMounted, ref, computed } from "vue";
+  import router from "@/router/index.ts";
+  import useVuelidate from "@vuelidate/core";
   import formError from "@/components/formError.vue";
   import { rules } from "@/utils/validationSchemas.ts";
-  import useVuelidate from "@vuelidate/core";
   import {sameAs, required} from "@vuelidate/validators";
-  import router from "@/router/index.ts";
 
   const isLogin = ref(true);
   //Form validation start -----
