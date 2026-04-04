@@ -1,18 +1,42 @@
 <script setup>
 import {ref, onMounted, onUnmounted, onUpdated} from "vue";
-import Dropdown from "@/components/dropdown.vue";
+import {usePotsStore} from "@/features/pots/store/usePotsStore.ts";
+import {storeToRefs} from "pinia";
+import {putData} from "@/utils/helpers.ts";
 
+console.log("----deposit")
+const store = usePotsStore();
+const { pots } = storeToRefs(store);
+const props = defineProps({
+  id: {
+    type: Number,
+    required: true
+  }
+})
 const emit = defineEmits(['closeModal'])
+const closeModal = () => {
+  emit('closeModal')
+}
+
+const idx = pots.value.findIndex(p => p.id === Number(props.id));
+const originalCard = pots.value[idx];
+const card = ref({
+  id: originalCard["id"],
+  name: originalCard["name"],
+  target: originalCard["target"],
+  saved: originalCard["saved"],
+  color: originalCard["color"],
+})
+const showModal = ref(true);
+const count = ref(0);
 const isMdUp = ref(false);
 const widthSmall = '295px'
 const widthMid = '496px'
 const arr = ['a', 'b', 'c']
+const currSaved = ref(originalCard['saved'])
+const addition = ref()
+
 let mediaQuery
-const showModal = ref(true);
-const closeModal = () => {
-  emit('closeModal')
-}
-const count = ref(0);
 onMounted(() => {
   mediaQuery = window.matchMedia("(min-width: 768px)")
   isMdUp.value = mediaQuery.matches
@@ -21,6 +45,20 @@ onMounted(() => {
     isMdUp.value = e.matches;
   })
 })
+
+const potsUrl = import.meta.env.VITE_API_POTS_URL
+const addToSavings = async() => {
+  try{
+    currSaved.value =  Number(originalCard['saved']) + Math.abs(addition.value);
+    card.value.saved = currSaved.value;
+    await putData(potsUrl, props.id, card.value);
+    pots.value[idx].saved = currSaved.value;
+    addition.value = 0;
+    closeModal();
+    console.log("pots.value[idx]", pots.value[idx])
+  }
+  catch(err){}
+}
 
 onUnmounted(() => {
   console.log("modal UNMOUNTED!")
@@ -46,7 +84,7 @@ onUpdated(() => {
         <div class="grid h-22.25 gap-4">
           <p class="flex justify-between items-center h-9.5">
             <span class="text-sm">New Amount</span>
-            <span class="text-[32px] font-bold">$559.00</span>
+            <span class="text-[32px] font-bold">${{currSaved}}</span>
           </p>
           <div class="flex flex-col justify-between h-9.75">
             <div class="h-2 rounded-lg bg-peach">
@@ -64,9 +102,9 @@ onUpdated(() => {
 
       <div class="target_local relative h-16.75 grid">
         <span>Amount to Add</span>
-        <input class="pot_name_local border pl-10 h-11.25 hover:outline-1 hover:outline-[#696868] cursor-pointer border-gray-400 rounded-lg" type="text">
+        <input v-model="addition" class="pot_name_local border pl-10 h-11.25 hover:outline-1 hover:outline-[#696868] cursor-pointer border-gray-400 rounded-lg" type="number">
       </div>
-      <button class="bg-black text-white rounded-lg h-13.25">Confirm Addition</button>
+      <button @click="addToSavings" class="bg-black text-white rounded-lg h-13.25">Confirm Addition</button>
     </div>
 </div>
 </template>

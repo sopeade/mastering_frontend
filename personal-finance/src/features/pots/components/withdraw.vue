@@ -1,18 +1,55 @@
 <script setup>
 import {ref, onMounted, onUnmounted, onUpdated} from "vue";
-import Dropdown from "@/components/dropdown.vue";
+import {usePotsStore} from "@/features/pots/store/usePotsStore.ts";
+import {storeToRefs} from "pinia";
+import {putData} from "@/utils/helpers.ts";
 
+console.log("----Withdraw")
+const store = usePotsStore();
+const { pots } = storeToRefs(store);
+const props = defineProps({
+  id: {
+    type: Number,
+    required: true
+  }
+})
 const emit = defineEmits(['closeModal'])
+const closeModal = () => {
+  emit('closeModal')
+}
+const idx = pots.value.findIndex(p => p.id === Number(props.id));
+const originalCard = pots.value[idx];
+const card = ref({
+  id: originalCard["id"],
+  name: originalCard["name"],
+  target: originalCard["target"],
+  saved: originalCard["saved"],
+  color: originalCard["color"],
+})
 const isMdUp = ref(false);
 const widthSmall = '295px'
 const widthMid = '496px'
 const arr = ['a', 'b', 'c']
 let mediaQuery
 const showModal = ref(true);
-const closeModal = () => {
-  emit('closeModal')
+
+const currSaved = ref(originalCard['saved'])
+const withdrawal = ref()
+
+
+const potsUrl = import.meta.env.VITE_API_POTS_URL
+const subtractFromSavings = async() => {
+  try {
+    currSaved.value = Number(originalCard['saved']) - Math.abs(withdrawal.value);
+    card.value.saved = currSaved.value;
+    await putData(potsUrl, props.id, card.value);
+    pots.value[idx].saved = currSaved.value;
+    withdrawal.value = 0;
+    console.log("pots.value[idx]", pots.value[idx])
+    closeModal();
+  }
+  catch(err){}
 }
-const count = ref(0);
 onMounted(() => {
   mediaQuery = window.matchMedia("(min-width: 768px)")
   isMdUp.value = mediaQuery.matches
@@ -46,7 +83,7 @@ onUpdated(() => {
         <div class="grid h-22.25 gap-4">
           <p class="flex justify-between items-center h-9.5">
             <span class="text-sm">New Amount</span>
-            <span class="text-[32px] font-bold">$559.00</span>
+            <span class="text-[32px] font-bold">${{currSaved}}</span>
           </p>
           <div class="flex flex-col justify-between h-9.75">
             <div class="h-2 rounded-lg bg-peach">
@@ -64,9 +101,9 @@ onUpdated(() => {
 
       <div class="target_local relative h-16.75 grid">
         <span>Amount to Withdraw</span>
-        <input class="pot_name_local  border border-[#696868] pl-10 h-11.25 cursor-pointer hover:border hover:border-black rounded-lg" type="text">
+        <input v-model="withdrawal" class="pot_name_local  border border-[#696868] pl-10 h-11.25 cursor-pointer hover:border hover:border-black rounded-lg" type="number">
       </div>
-      <button class="bg-black text-white rounded-lg h-13.25">Confirm Withdrawal</button>
+      <button @click="subtractFromSavings" class="bg-black text-white rounded-lg h-13.25">Confirm Withdrawal</button>
     </div>
 </div>
 </template>

@@ -1,18 +1,55 @@
 <script setup>
 import {ref, onMounted, onUnmounted, onUpdated} from "vue";
 import Dropdown from "@/components/dropdown.vue";
+import {putData} from "@/utils/helpers.ts";
+import {usePotsStore} from "@/features/pots/store/usePotsStore.ts";
+import {storeToRefs} from "pinia";
 
+console.log("----editCard")
+const store = usePotsStore();
+const { pots } = storeToRefs(store);
+const props = defineProps({
+  id: {
+    type: Number,
+    required: true
+  }
+})
 const emit = defineEmits(['closeModal'])
+const closeModal = () => {
+  emit('closeModal')
+}
+console.log("pots.value", pots.value)
+const idx = pots.value.findIndex(p => p.id === Number(props.id));
+const originalCard = pots.value[idx];
+const card = ref({
+  id: originalCard["id"],
+  name: originalCard["name"],
+  target: originalCard["target"],
+  saved: originalCard["saved"],
+  color: originalCard["color"],
+})
+
+
+const showModal = ref(true);
+
+console.log("card", card.value)
+const potsUrl = import.meta.env.VITE_API_POTS_URL
+const save = async() => {
+  try{
+    await putData(potsUrl, props.id, card.value)
+    pots.value[idx] = card.value
+    closeModal();
+  }
+  catch (err){
+    console.error("save failed:", err)
+  }
+}
+
 const isMdUp = ref(false);
 const widthSmall = '295px'
 const widthMid = '496px'
 const arr = ['a', 'b', 'c']
 let mediaQuery
-const showModal = ref(true);
-const closeModal = () => {
-  emit('closeModal')
-}
-
 onMounted(() => {
   mediaQuery = window.matchMedia("(min-width: 768px)")
   isMdUp.value = mediaQuery.matches
@@ -44,22 +81,22 @@ onUpdated(() => {
       <div class="flex flex-col justify-between h-58.25">
         <div class="">
           <span>Pot Name</span>
-          <input class=" border w-full border-gray-400 rounded-lg h-11.25" type="text">
+          <input v-model="card.name" class=" border w-full border-gray-400 pl-3 rounded-lg h-11.25" type="text">
         </div>
         <div class="relative">
           <span>Target</span>
           <div class="target_local">
-            <input class=" border w-full border-gray-400 rounded-lg h-11.25" type="text">
+            <input v-model="card.target" class=" border w-full border-gray-400 pl-6 rounded-lg h-11.25" type="number">
           </div>
 
         </div>
         <div class="">
           <span>Theme</span>
-          <dropdown items="arr" :select-width="isMdUp ? widthMid : widthSmall"
+          <dropdown :items="arr" :select-width="isMdUp ? widthMid : widthSmall" @updatedOption="val => card.color=val"
                     select-focus-border="1px solid #696868" options-gap="3rem" id="budget"/>
         </div>
       </div>
-      <button class="bg-black text-white rounded-lg h-13.25">Save Changes</button>
+      <button @click="save" class="bg-black text-white rounded-lg h-13.25">Save Changes</button>
     </div>
 </div>
 </template>
@@ -75,7 +112,7 @@ onUpdated(() => {
 .target_local::before{
   content:"$";
   position: absolute;
-  left: 20px;
+  left: 10px;
   top: 35px;
   font-size: 16px;
   color: gray;

@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import {computed, onUpdated} from 'vue';
 // https://www.digitalocean.com/community/tutorials/vuejs-vue-pagination-component
 const props = defineProps({
   maxVisibleButtons: {
@@ -67,12 +67,18 @@ const onClickPage         = (page) => {emit('pageChanged', page)}
 const onClickNextPage     = () => { emit('pageChanged', props.currentPage + 1)}
 const onClickLastPage     = () => { emit('pageChanged', props.totalPages)}
 
+onUpdated(() => {
+  if (isInLastPage.value){
+    console.log("isInLastPage", isInLastPage.value)
+  }
+})
 
 </script>
 
 <template>
   <ul class="flex justify-between">
-    <li class="flex gap-4">
+    <li class="flex gap-4"
+      :style="{visibility: isInFirstPage ? 'hidden' : 'visible'}">
       <div class="hidden">
         <button
           type="button"
@@ -89,9 +95,9 @@ const onClickLastPage     = () => { emit('pageChanged', props.totalPages)}
       <div class="flex border border-gray-400 rounded-lg">
         <button
             class="flex w-12 h-10 gap-4 md:w-23.25 justify-center hover:bg-[#98908b]"
-          type="button"
-          @click="onClickPreviousPage"
-          :disabled="isInFirstPage"
+            type="button"
+            @click="onClickPreviousPage"
+            :disabled="isInFirstPage"
         >
           <img class="w-4 h-4 self-center" src="@/assets/images/icon-caret-left.svg" alt="">
           <span class="self-center hidden md:inline">
@@ -117,7 +123,8 @@ const onClickLastPage     = () => { emit('pageChanged', props.totalPages)}
       </div>
     </li>
     <!-- Visible Buttons End -->
-    <li class="flex gap-4">
+    <li class="flex gap-4"
+        :style="{visibility: isInLastPage ? 'hidden' : 'visible'}">
       <div class="flex border border-gray-400 rounded-lg">
         <button
           class="flex w-12 h-10 gap-4 md:w-23.25 justify-center hover:bg-[#98908b]"

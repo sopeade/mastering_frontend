@@ -1,7 +1,12 @@
 <script setup>
 import {ref, onMounted, onUnmounted, onUpdated} from "vue";
 import Dropdown from "@/components/dropdown.vue";
+import { useBudgetsStore } from "@/features/budgets/store/useBudgetsStore.ts";
+import { storeToRefs } from "pinia";
+import {postData} from "@/utils/helpers.ts";
 
+const store = useBudgetsStore();
+const { budgets } = storeToRefs(store);
 const emit = defineEmits(['closeModal'])
 const isMdUp = ref(false);
 const widthSmall = '295px'
@@ -13,6 +18,25 @@ const closeModal = () => {
   emit('closeModal')
 }
 
+const newBudget = ref({
+  id: 10,
+  category: "",
+  max: null,
+  spent: 0,
+  remaining: 0,
+  color: "",
+  items: []
+})
+
+const budgetUrl = import.meta.env.VITE_API_BUDGETS_URL
+const addingBudget = async() => {
+  try{
+    await postData(budgetUrl,  newBudget.value);
+    budgets.value.push(newBudget.value);
+    closeModal();
+  }
+  catch(err){}
+}
 onMounted(() => {
   mediaQuery = window.matchMedia("(min-width: 768px)")
   isMdUp.value = mediaQuery.matches
@@ -28,6 +52,7 @@ onUnmounted(() => {
 })
 onUpdated(() => {
   console.log("updated showmodal", showModal.value)
+  console.log("newBudget", newBudget.value)
 })
 </script>
 
@@ -45,20 +70,20 @@ onUpdated(() => {
       <div class="flex flex-col justify-between h-58.25">
         <div class="">
           <span>Budget Category</span>
-          <dropdown :items="arr" :select-width="isMdUp ? widthMid : widthSmall"
+          <dropdown :items="arr" :select-width="isMdUp ? widthMid : widthSmall" @updatedOption="val => newBudget.category=val"
                     select-border="1px solid #696868" options-gap="3rem" id="budget"/>
         </div>
         <div class="">
           <span class="target_local">Maximum Spending</span>
-          <input class=" w-full border border-[#696868] hover:border-black rounded-lg h-11.25" type="text">
+          <input v-model="newBudget.max" class=" w-full border border-[#696868] hover:border-black rounded-lg h-11.25" type="number">
         </div>
         <div class="relative">
           <span>Color Tag</span>
-          <dropdown items="arr" :select-width="isMdUp ? widthMid : widthSmall"
+          <dropdown :items="arr" :select-width="isMdUp ? widthMid : widthSmall" @updatedOption="val => newBudget.color=val"
                     select-border="1px solid #696868" options-gap="3rem" id="budget"/>
         </div>
       </div>
-      <button class="bg-black text-white rounded-lg h-13.25">Add Budget</button>
+      <button @click="addingBudget" class="bg-black text-white rounded-lg h-13.25">Add Budget</button>
     </div>
 </div>
 </template>

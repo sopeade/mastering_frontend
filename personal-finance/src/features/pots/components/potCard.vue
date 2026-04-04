@@ -8,6 +8,10 @@ import {toPercent} from "@/utils/helpers.ts";
 const isWithdraw = ref(false);
 const isAdd = ref(false);
 const props = defineProps({
+  id:{
+    type: Number,
+    required: true,
+  },
   name:{
     type: String,
     required: false,
@@ -23,7 +27,6 @@ const props = defineProps({
     required: false,
     default: 0
   },
-
   color:{
     type: String,
     required: false,
@@ -40,7 +43,7 @@ const props = defineProps({
            :class="`${props.color}`"></div>
         <p class="font-bold text-[20px]">{{props.name}}</p>
       </div>
-      <menu-pot/>
+      <menu-pot :id="props.id" :name="props.name" :saved="props.saved" :target="props.target" :color="props.color"/>
     </div>
     <div class="grid gap-4">
       <p class="flex justify-between">
@@ -74,8 +77,8 @@ const props = defineProps({
     </div>
   </section>
 
-  <deposit v-if="isAdd" @close-modal="isAdd=false"/>
-  <withdraw v-if="isWithdraw" @close-modal="isWithdraw=false"/>
+  <deposit v-if="isAdd" @close-modal="isAdd=false" :id="props.id"/>
+  <withdraw v-if="isWithdraw" @close-modal="isWithdraw=false" :id="props.id"/>
 </template>
 
 <style scoped>

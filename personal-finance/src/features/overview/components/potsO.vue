@@ -38,16 +38,6 @@
             <h1 class="text-[32px] font-bold">${{potsSummary.total}}</h1>
           </div>
         </div>
-<!--        <colored-items>-->
-<!--          <template #item1>{{potsSummary.items[0]}}</template>-->
-<!--          <template #sum1>$159</template>-->
-<!--          <template #item2>Gift</template>-->
-<!--          <template #sum2>$40</template>-->
-<!--          <template #item3>Concert Ticket</template>-->
-<!--          <template #sum3>$110</template>-->
-<!--          <template #item4>New Laptop</template>-->
-<!--          <template #sum4>$10</template>-->
-<!--        </colored-items>-->
         <colored-items :items="potsSummary.items"/>
       </div>
     </div>

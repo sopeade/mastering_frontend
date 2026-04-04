@@ -3,6 +3,14 @@ import {ref, onMounted, onBeforeUnmount} from "vue";
 import editCard from "@/features/budgets/components/editCard.vue";
 import deleteCard from "@/features/budgets/components/deleteCard.vue";
 
+
+const props = defineProps({
+  id:{
+    type: Number,
+    required: true
+  }
+})
+
 const showCard = ref(false);
 const isEditing = ref(false);
 const isDeleting = ref(false);
@@ -48,8 +56,8 @@ onBeforeUnmount(()=> {
       </div>
     </div>
   </div>
-  <edit-card v-if="isEditing" @close-modal="isEditing=false" ref="popUpRef"/>
-  <delete-card v-if="isDeleting" @close-modal="isDeleting=false" ref="popUpRef"/>
+  <edit-card v-if="isEditing" :id="props.id" @close-modal="isEditing=false;showCard=false" ref="popUpRef"/>
+  <delete-card v-if="isDeleting" :id="props.id" @close-modal="isDeleting=false" ref="popUpRef"/>
 </template>
 
 

@@ -3,7 +3,7 @@ import { computed, ref } from "vue";
 import { usePotsStore } from "@/features/pots/store/usePotsStore.ts";
 import { useBudgetsStore } from "@/features/budgets/store/useBudgetsStore.ts";
 import { useBillsStore } from "@/features/bills/store/useBillsStore.ts";
-import {useTransactionStore} from "@/features/transactions/store/useTransactionStore.ts";
+import { useTransactionStore } from "@/features/transactions/store/useTransactionStore.ts";
 
 
 export const useOverviewStore = defineStore("overviewStore", () => {

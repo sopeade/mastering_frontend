@@ -1,23 +1,40 @@
 <script setup>
 import searchIcon from '@/assets/images/icon-search.svg';
 import Pagination from "@/components/Pagination.vue";
-import {computed, ref, onUnmounted, onMounted} from "vue";
+import {computed, ref, onUnmounted, onMounted, watch} from "vue";
 import {showSign} from "@/utils/helpers.ts";
 import dropdown from "@/components/dropdown.vue"
-import {sortArr} from "@/utils/helpers.ts";
+import { getUniqueCategory, sortOptions, sortBy } from "@/utils/helpers.ts";
 import { useTransactionStore } from "@/features/transactions/store/useTransactionStore.ts";
 import {storeToRefs} from "pinia";
+import Dropdown from "@/components/dropdown.vue";
 
 const store = useTransactionStore();
 const { transactions } = storeToRefs(store);
 
 const currentPage = ref(1);
 const perPage = ref(15);
-
+const transactionData = ref([...transactions.value]);
+console.log("transactionData", transactionData.value)
+const sortingSelection = ref('')
+const categorySelection = ref('')
 const paginatedData = computed(() => {
   const start = (currentPage.value - 1) * perPage.value;
   const end   = start + perPage.value;
-  return transactions.value.slice(start, end);
+  return transactionData.value.slice(start, end);
+})
+const categoryOptions = ["All Transactions",...getUniqueCategory(transactions.value)]
+watch(sortingSelection, (newVal, _)=>{
+  transactionData.value = sortBy(newVal, transactions.value)
+})
+watch(categorySelection, (newVal, _) => {
+  console.log("categorySelection changed", newVal)
+  currentPage.value = 1;
+  if (newVal === "All Transactions"){
+    transactionData.value = transactions.value;
+    return transactionData.value;
+  }
+  transactionData.value = transactions.value.filter((obj) => obj.category === newVal)
 })
 
 onMounted(async () => {
@@ -27,7 +44,6 @@ onMounted(async () => {
 })
 
 const onPageChange = (page) => { currentPage.value = page}
-// const sortArr = ["Latest", "Oldest", "A to Z", "Z to A", "Highest", "Lowest"];
 
 onUnmounted(() => {
   console.log("Transaction is unmounted!!!!!")
@@ -37,7 +53,7 @@ onUnmounted(() => {
 const maxViewedTransactions = 5;
 
 const totalPages = computed(() => {
-  return Math.ceil(transactions.value.length/perPage.value)
+  return Math.ceil(transactionData.value.length/perPage.value)
 })
 </script>
 
@@ -56,12 +72,12 @@ const totalPages = computed(() => {
             <div class="search_labels_local hidden md:flex gap-5">
               <div class="flex gap-2">
                 <label class="self-center text-[14px]" for="sort">Sort by</label>
-                <dropdown :items="sortArr" select-width="7.5rem" select-height="45px"
+                <dropdown :items="sortOptions" select-width="7.5rem" select-height="45px" @updatedOption="val => sortingSelection=val"
                           id="sort"/>
               </div>
               <div class="flex basis-1/12 gap-2">
                 <label class="self-center text-[14px]" for="category">Category</label>
-                <dropdown class="" :items="sortArr" select-width="11rem" select-height="45px"
+                <dropdown class="" :items="categoryOptions" select-width="13rem" select-height="45px" @updatedOption="val => categorySelection=val"
                           id="category"/>
               </div>
             </div>

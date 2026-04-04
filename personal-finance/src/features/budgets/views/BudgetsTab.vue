@@ -43,10 +43,8 @@ onUnmounted(() => {
       <div class="grid flex-3 gap-6">
         <budget-card
             v-for="(budget, idx) in budgets" :key="budget.idx"
-            :category="budget.category" :max="budget.max" :items="budget.items"
+            :id="budget.id" :category="budget.category" :max="budget.max" :items="budget.items"
             :spent="budget.spent" :remaining="budget.remaining" color="bg-blue-300"/>
-
-<!--        <budget-card budget_category="music" :max_spending="0" color="bg-blue-300"/>-->
       </div>
     </div>
   </section>

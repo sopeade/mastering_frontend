@@ -1,107 +1,126 @@
 {
   "budgets": [
     {
-      "id":  1,
-      "category":  "Bills",
+      "id": "1",
+      "category": "Bills",
       "max": 300,
-      "spent": 150.00,
-      "left": 600.00,
+      "spent": 150,
+      "left": 600,
       "color": "red",
-      "items":  [
-        {"name": "Spark Electric Solutions",
-          "category":  "General",
-          "date":  "2 Aug 2024",
-          "amount":  -100.00
+      "items": [
+        {
+          "name": "Spark Electric Solutions",
+          "category": "General",
+          "date": "2 Aug 2024",
+          "amount": -100
         },
-        {"name": "Rina Sato",
-          "category":  "dining out",
-          "date":  "2 Aug 2024",
-          "amount":  -50.00
+        {
+          "name": "Rina Sato",
+          "category": "dining out",
+          "date": "2 Aug 2024",
+          "amount": -50
         },
-        {"name": "Aqua Flow Utilities",
-          "category":  "Utilities",
-          "date":  "30th Jul 2024",
-          "amount":  -100.00
+        {
+          "name": "Aqua Flow Utilities",
+          "category": "Utilities",
+          "date": "30th Jul 2024",
+          "amount": -100
         },
-        {"name": "David Bornes",
-          "category":  "General",
-          "date":  "5 Sep 2024",
-          "amount":  -20.00
+        {
+          "name": "David Bornes",
+          "category": "General",
+          "date": "5 Sep 2024",
+          "amount": -20
         }
       ]
     },
     {
-        "id": 2,
-        "category": "Entertainment",
-        "max": 50.00,
-        "spent": 15.00,
-        "remaining": 35.00,
-        "color": "red",
-        "items": [
-          {
-            "name": "James Thompson",
-            "category": "General",
-            "date": "11 Aug 2024",
-            "amount": -5.00
-          },
-          {
-            "name": "Pixel Playground",
-            "category": "dining out",
-            "date": "11 Aug 2024",
-            "amount": -10.00
-          },
-          {
-            "name": "Rina Sato",
-            "category": "Groceries",
-            "date": "3 Jul 2024",
-            "amount": -10.00
-          }
-        ]
+      "id": "2",
+      "category": "Entertainment",
+      "max": 50,
+      "spent": 15,
+      "remaining": 35,
+      "color": "red",
+      "items": [
+        {
+          "name": "James Thompson",
+          "category": "General",
+          "date": "11 Aug 2024",
+          "amount": -5
+        },
+        {
+          "name": "Pixel Playground",
+          "category": "dining out",
+          "date": "11 Aug 2024",
+          "amount": -10
+        },
+        {
+          "name": "Rina Sato",
+          "category": "Groceries",
+          "date": "3 Jul 2024",
+          "amount": -10
+        }
+      ]
     },
     {
-      "id": 3,
+      "id": "3",
       "category": "Dining Out",
-      "max": 75.00,
+      "max": 75,
       "spent": 133.75,
-      "remaining": 0.00,
+      "remaining": 0,
       "color": "red",
-      "items":  [
-        {"name": "Savory Bites Bistro",
-          "category":  "General",
-          "date":  "19 Aug 2024",
-          "amount":  -55.00
+      "items": [
+        {
+          "name": "Savory Bites Bistro",
+          "category": "General",
+          "date": "19 Aug 2024",
+          "amount": -55
         },
-        {"name": "Ethan Clark",
-          "category":  "dining out",
-          "date":  "20 Aug 2024",
-          "amount":  -32.50
+        {
+          "name": "Ethan Clark",
+          "category": "dining out",
+          "date": "20 Aug 2024",
+          "amount": -32.5
         },
-        {"name": "Ella Phillips",
-          "category":  "Groceries",
-          "date":  "10 Aug 2024",
-          "amount":  -45.00
+        {
+          "name": "Ella Phillips",
+          "category": "Groceries",
+          "date": "10 Aug 2024",
+          "amount": -45
         }
       ]
     },
     {
-      "id": 4,
+      "id": "4",
       "category": "Personal Care",
-      "max": 100.00,
-      "spent": 40.00,
-      "remaining": 60.00,
+      "max": 100,
+      "spent": 40,
+      "remaining": 60,
       "color": "red",
-      "items":  [
-        {"name": "William Harris",
-          "category":  "General",
-          "date":  "5 Aug 2024",
-          "amount":  -10.00
+      "items": [
+        {
+          "name": "William Harris",
+          "category": "General",
+          "date": "5 Aug 2024",
+          "amount": -10
         },
-        {"name": "Serenity Spa & Wellness",
-          "category":  "General",
-          "date":  "3 Aug 2024",
-          "amount":  -30.00
+        {
+          "name": "Serenity Spa & Wellness",
+          "category": "General",
+          "date": "3 Aug 2024",
+          "amount": -30
         }
       ]
+    },
+    {
+      "id": "10",
+      "category": "b",
+      "max": 230,
+      "spent": 0,
+      "remaining": 0,
+      "color": "",
+      "items": []
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

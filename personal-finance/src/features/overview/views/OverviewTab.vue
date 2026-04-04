@@ -5,7 +5,6 @@
   import transactionsO from "@/features/overview/components/transactionsO.vue";
   import budgetsO from "@/features/overview/components/budgetsO.vue";
   import billsO from "@/features/overview/components/billsO.vue";
-  import { potsOverviewData, billsOverviewData, budgetsOverviewData } from "@/utils/helpers.ts";
   import { useOverviewStore } from "@/features/overview/store/useOverviewStore.ts";
   import {storeToRefs} from "pinia";
 

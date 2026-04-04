@@ -34,7 +34,7 @@ const showAddPot = () => {
     <div class="flex flex-col lg:flex-row lg:flex-wrap gap-6">
       <pot-card
           v-for="(pot, idx) in pots" :key="pot.idx"
-          :name="pot.name" :target="pot.target" :saved="pot.saved" color="bg-green-500"/>
+          :id="pot.id" :name="pot.name" :target="pot.target" :saved="pot.saved" :color="pot.color"/>
     </div>
   </section>
   <add-pot v-if="isAddPot" @close-modal="isAddPot=false"/>

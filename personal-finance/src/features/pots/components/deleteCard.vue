@@ -1,11 +1,39 @@
 <script setup>
 import {ref, onMounted, onUnmounted, onUpdated} from "vue";
-import Dropdown from "@/components/dropdown.vue";
+import {deleteData, putData} from "@/utils/helpers.ts";
+import {usePotsStore} from "@/features/pots/store/usePotsStore.ts";
+import {storeToRefs} from "pinia";
+
+console.log("----editCard")
+const store = usePotsStore();
+const { pots } = storeToRefs(store);
+const props = defineProps({
+  id: {
+    type: Number,
+    required: true
+  }
+})
 
 const emit = defineEmits(['closeModal'])
-const showModal = ref(true);
 const closeModal = () => {
   emit('closeModal')
+}
+const potsUrl = import.meta.env.VITE_API_POTS_URL
+console.log("baseUrl", potsUrl)
+
+const handleDelete = async() => {
+  try{
+    await deleteData(potsUrl, props.id)
+    pots.value.forEach((val, index)=>{
+      if (val.id === props.id){
+        pots.value.splice(index, 1);
+      }
+    })
+    closeModal();
+  }
+  catch (err){
+    console.error("save failed:", err)
+  }
 }
 
 
@@ -22,13 +50,14 @@ const closeModal = () => {
       </div>
       <p class="text-gray-500 text-sm h-15.75 md:h-10.5">Are you sure you want to delete this pot? This action cannot be reversed,
         and all the data inside it will be removed forever.</p>
+<!--          @click="deleteData(potsUrl, props.id); closeModal()"-->
       <button
-          @click=""
+          @click="handleDelete"
           class="bg-[#d46c5e] text-white text-sm rounded-lg h-13.25">
             Yes, Confirm Deletion
       </button>
       <button
-          @click=""
+          @click="closeModal"
           class="text-gray-500 rounded-lg text-sm h-5.25">
             No, Go back
       </button>

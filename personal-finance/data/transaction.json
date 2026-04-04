@@ -2,123 +2,123 @@
   "transactions": [
     {
       "name": "Emma Richardson",
-      "category": "personal Care",
+      "category": "Entertainment",
       "amount": 75.50,
-      "date": "19/08/2024"
+      "date": "2004-07-19"
     },
     {
       "name": "Savory Bites Bistro",
-      "category": "personal Care",
+      "category": "Dining Out",
       "amount": 75.50,
-      "date": "19/08/2024"
+      "date": "2026-03-22"
     },
     {
       "name": "Daniel Carter",
-      "category": "personal Care",
+      "category": "Entertainment",
       "amount": -75.50,
-      "date": "19/08/2024"
+      "date": "2020-11-09"
     },
     {
       "name": "Sun Park",
       "category": "personal Care",
       "amount": 75.50,
-      "date": "19/08/2024"
+      "date": "2015-05-22"
     },
     {
-      "name": "Urban Services Hub",
-      "category": "personal Care",
+      "name": "Urban Ride Hub",
+      "category": "Transportation",
       "amount": 75.50,
-      "date": "19/08/2024"
+      "date": "2025-08-16"
     },
     {
       "name": "whats good",
       "category": "personal Care",
       "amount": -5.20,
-      "date": "29/09/2020"
+      "date": "2020-09-29"
     },
     {
       "name": "Savory Bites Bistro",
-      "category": "personal Care",
+      "category": "Dining Out",
       "amount": 75.50,
-      "date": "19/08/2024"
+      "date": "2019-01-01"
     },
     {
       "name": "Daniel Carter",
-      "category": "personal Care",
+      "category": "Bills",
       "amount": -75.50,
-      "date": "19/08/2024"
+      "date": "2024-08-19"
     },
     {
-      "name": "Sun Park",
-      "category": "personal Care",
+      "name": "K Park",
+      "category": "Groceries",
       "amount": 75.50,
-      "date": "19/08/2024"
+      "date": "2024-08-20"
     },
     {
-      "name": "Urban Services Hub",
-      "category": "personal Care",
+      "name": "Urban Ride Hub",
+      "category": "Transportation",
       "amount": 75.50,
-      "date": "19/08/2024"
+      "date": "2024-08-19"
     },
     {
       "name": "whats good",
       "category": "personal Care",
       "amount": -5.20,
-      "date": "29/09/2020"
+      "date": "2020-09-29"
     },
     {
       "name": "Sun Park",
       "category": "personal Care",
       "amount": 75.50,
-      "date": "19/08/2024"
+      "date": "2024-08-19"
     },
     {
-      "name": "Urban Services Hub",
-      "category": "personal Care",
+      "name": "Urban Ride Hub",
+      "category": "Transportation",
       "amount": 75.50,
-      "date": "19/08/2024"
+      "date": "2024-08-19"
     },
     {
       "name": "whats good",
       "category": "personal Care",
       "amount": -5.20,
-      "date": "29/09/2020"
+      "date": "2020-09-29"
     },
     {
       "name": "Emma Richardson",
-      "category": "personal Care",
+      "category": "Bills",
       "amount": 75.50,
-      "date": "19/08/2024"
+      "date": "2024-08-19"
     },
     {
       "name": "Savory Bites Bistro",
       "category": "personal Care",
       "amount": 75.50,
-      "date": "19/08/2024"
+      "date": "2024-08-19"
     },
     {
       "name": "Daniel Carter",
       "category": "personal Care",
       "amount": -75.50,
-      "date": "19/08/2024"
+      "date": "2024-08-19"
     },
     {
       "name": "Sun Park",
       "category": "personal Care",
       "amount": 75.50,
-      "date": "19/08/2024"
+      "date": "2024-08-19"
     },
     {
-      "name": "Urban Services Hub",
-      "category": "personal Care",
+      "name": "Urban Ride Hub",
+      "category": "Transportation",
       "amount": 75.50,
-      "date": "19/08/2024"
+      "date": "2024-08-19"
     },
     {
       "name": "whats good",
       "category": "personal Care",
       "amount": -5.20,
-      "date": "29/09/2020"
+      "date": "2020-09-29"
     }
   ]
 }

@@ -18,7 +18,7 @@ import {onMounted, ref} from 'vue';
 
   // Example: update data dynamically
   setTimeout(() => {
-    values.value = [400, 380, 520, 460, 610]
+    values.value = [400, 180, 520, 460, 610]
   }, 3000)
 </script>
 

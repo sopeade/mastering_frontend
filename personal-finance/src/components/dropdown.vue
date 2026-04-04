@@ -96,12 +96,12 @@ const props = defineProps({
 const dropdownRef = ref(null);
 const ariaHidden = ref(true);
 const showDropdown = ref(false);
-const selectedOption = ref(-1);
+const selectedOption = ref(0);
 const isFocus = ref(false);
 const isHover = ref(false);
 const isItemHover = ref(Array(props.items.length).fill(false));
 
-
+console.log("selectedOption", selectedOption.value)
 const toggleCustomSelect = () => {
   const isClosed = showDropdown.value === false;
   if (isClosed){openDropdown()}
@@ -121,7 +121,15 @@ const closeDropdown = () => {
   document.removeEventListener("click", watchClickOutside);
   document.removeEventListener("keydown", keyNavigation);
 }
-
+const emit = defineEmits(['updatedOption'])
+const onChange = (e) => {
+  console.log("onChange", props.items[e.target.value])
+  emit('updatedOption', props.items[e.target.value])
+}
+const onChangeCustom = (idx) => {
+  selectedOption.value = idx
+  emit('updatedOption', props.items[idx])
+}
 const watchClickOutside = (event) => {
   // Close only if click is outside the dropdown
   if (dropdownRef.value && !dropdownRef.value.contains(event.target)) {
@@ -130,7 +138,9 @@ const watchClickOutside = (event) => {
 };
 
 const keyNavigation = (e) => {
+  console.log("keyNavigation")
   const keyPress = e.code;
+  // emit('updatedOption', props.items[e.target.value])
   const keyIdx = selectedOption.value;
   switch(keyPress){
     case 'ArrowUp':
@@ -162,10 +172,11 @@ onBeforeUnmount(()=>{
   <div class="selectWrapper" ref="dropdownRef">
 
     <!--Default-->
+<!--            :value="props.updatedOption"-->
     <select class="selectNative"
-            v-model="selectedOption"
             @focus="isFocus=true"
             @blur="isFocus=false"
+            @change="onChange"
             aria-labelledby="label"
             :style="{fontSize:props.selectFontSize, backgroundColor: props.selectBgColor,
             width: props.selectWidth, height: props.selectHeight, border: isFocus? props.selectFocusBorder : props.selectBorder,
@@ -187,7 +198,7 @@ onBeforeUnmount(()=>{
            borderRadius: props.selectBorderRadius, paddingInline: props.selectPaddingX, paddingBlock: props.selectPaddingY}"
             @mouseenter="isHover=true"
             @mouseleave="isHover=false">
-            <span>{{selectedOption>=0 ? items[selectedOption] : props.selectDefaultText}}</span>
+            <span>{{selectedOption>=0 ? props.items[selectedOption] : props.selectDefaultText}}</span>
       </div>
       <ul class="selectCustom-options"
             :style="{top: props.optionsGap, borderRadius: props.optionsBorderRadius, overflow: 'hidden'}">
@@ -197,7 +208,7 @@ onBeforeUnmount(()=>{
             }"
             @mouseenter="isItemHover[idx]=true"
             @mouseleave="isItemHover[idx]=false"
-             @click="selectedOption=idx"
+             @click="onChangeCustom(idx)"
              @keyup.prevent.up="keyNavigation(e)"
              @keyup.prevent.down="keyNavigation(e)"
              @keyup.enter="keyNavigation(e)"

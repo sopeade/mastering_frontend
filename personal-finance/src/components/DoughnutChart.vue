@@ -98,7 +98,7 @@ onMounted(() => {
   const config = {
     type: 'doughnut',
     data: {
-      // labels: props.labels,
+      labels: props.labels,
       datasets: [
         {
           data: props.data,

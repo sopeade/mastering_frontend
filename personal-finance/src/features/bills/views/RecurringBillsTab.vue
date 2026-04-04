@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted} from "vue";
 import Dropdown from "@/components/dropdown.vue";
-import { sortArr } from "@/utils/helpers.ts";
+import { sortOptions } from "@/utils/helpers.ts";
 import { useBillsStore } from "@/features/bills/store/useBillsStore.ts";
 import { storeToRefs } from "pinia";
 
@@ -57,7 +57,7 @@ onUnmounted(() => {
           <img class="h-5 w-5 md:hidden" src="@/assets/images/icon-sort-mobile.svg" alt="">
           <div class="hidden md:flex gap-2 h-full">
             <label class="self-center text-[14px]" for="sort">Sort by</label>
-            <dropdown :items="sortArr" select-width="7.5rem" select-height="45px"
+            <dropdown :items="sortOptions" select-width="7.5rem" select-height="45px"
                       id="sort"/>
           </div>
         </div>

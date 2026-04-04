@@ -3,11 +3,38 @@ import {ref, onMounted, onBeforeUnmount} from "vue";
 import editCard from "@/features/pots/components/editCard.vue";
 import deleteCard from "@/features/pots/components/deleteCard.vue";
 
+const props = defineProps({
+  id: {
+    type: Number,
+    required: true
+  },
+  name:{
+    type: String,
+    required: false,
+    default: 'Entertainment',
+  },
+  saved:{
+    type: Number,
+    required: false,
+    default: 0
+  },
+  target:{
+    type: Number,
+    required: false,
+    default: 0
+  },
+  color:{
+    type: String,
+    required: false,
+    default: 'bg-blue-300'
+  },
+})
 const showCard = ref(false);
 const isEditing = ref(false);
 const isDeleting = ref(false);
 const dropdownRef = ref(null);
 const popUpRef = ref(null);
+
 const handleClickOutside = (event) => {
   if (popUpRef.value && (isDeleting || isEditing)){
   }
@@ -48,8 +75,8 @@ onBeforeUnmount(()=> {
       </div>
     </div>
   </div>
-  <edit-card v-if="isEditing" @close-modal="isEditing=false" ref="popUpRef"/>
-  <delete-card v-if="isDeleting" @close-modal="isDeleting=false" ref="popUpRef"/>
+  <edit-card v-if="isEditing" :id="props.id" @close-modal="isEditing=false;showCard=false" ref="popUpRef"/>
+  <delete-card v-if="isDeleting" :id="props.id" @close-modal="isDeleting=false" ref="popUpRef"/>
 </template>
 
 

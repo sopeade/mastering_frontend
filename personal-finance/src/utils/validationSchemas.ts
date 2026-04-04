@@ -1,10 +1,13 @@
-import { required, email, minLength, helpers, sameAs, alphaNum} from "@vuelidate/validators";
+import { required, email, minLength, helpers, sameAs, alphaNum, numeric} from "@vuelidate/validators";
 
 export const rules = {
     text: {
         text_alphaNum: { alphaNum: helpers.withMessage(
                 "This field can only contain alphaNumeric characters",
                 alphaNum)},
+    },
+    numbers: {
+        required: helpers.withMessage( "This field can only contain Numbers", required),
     },
     email: {
         required: helpers.withMessage("Email is required", required),

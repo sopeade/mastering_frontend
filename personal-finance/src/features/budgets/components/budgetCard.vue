@@ -3,10 +3,13 @@ import { ref, onMounted } from 'vue';
 import menuBudget from '@/features/budgets/components/editBudgetDropdown.vue';
 
 const props = defineProps({
+  id:{
+    type: Number,
+    required: true,
+  },
   category:{
     type: String,
     required: true
-    // default: 'Entertainment',
   },
   max:{
     type: Number,
@@ -30,22 +33,22 @@ const props = defineProps({
   items: {
     type: Array,
     required: false,
-    default: () => {[
-      {name: 'Papa Software',
-        amount: '$10.00',
-        date: '16 Aug 2024',
-      },
-      {name: 'Quebec Services',
-        amount: '$5.00',
-        date: '12 Aug 2024',
-      },
-      {name: 'Quebec Services',
-        amount: '$5.00',
-        date: '12 Aug 2024',
-      }
-    ]}
   }
 })
+    // default: () => {[
+    //   {name: 'Papa Software',
+    //     amount: '$10.00',
+    //     date: '16 Aug 2024',
+    //   },
+    //   {name: 'Quebec Services',
+    //     amount: '$5.00',
+    //     date: '12 Aug 2024',
+    //   },
+    //   {name: 'Quebec Services',
+    //     amount: '$5.00',
+    //     date: '12 Aug 2024',
+    //   }
+    // ]}
 
 // const items = ref([
 //   {name: 'Papa Software',
@@ -65,14 +68,14 @@ const props = defineProps({
 
 
 <template>
-  <section class="grid bg-white rounded-2xl px-5 py-6 h-121.5 min-w-85.75 gap-5 shadow-cardShadow">
+  <section class="flex flex-col bg-white rounded-2xl px-5 py-6 h-121.5 min-w-85.75 gap-5 shadow-cardShadow">
     <div class="flex h-6 justify-between items-center">
       <div class="flex gap-4 items-center">
         <div class="name-dot h-4 w-4 rounded-full"
         :class="`${props.color}`"></div>
         <p class="font-bold text-[20px]">{{props.category}}</p>
       </div>
-      <menu-budget/>
+      <menu-budget :id="props.id"/>
     </div>
     <div class="name-max flex flex-col gap-4">
       <p class="text-[14px]">Maximum of ${{props.max}}</p>
@@ -107,8 +110,8 @@ const props = defineProps({
         </div>
       </div>
       <article class="border-b border-gray-200 h-16"
-                :class="{'border-b-0': items.length - 1 === idx}"
-                v-for="(item, idx) in items.slice(0, 3)" :key="item.id" >
+                :class="{'border-b-0': props.items.length - 1 === idx}"
+                v-for="(item, idx) in props.items.slice(0, 3)" :key="item.id" >
          <div class="flex justify-between items-center h-full">
 
            <p class="text-[12px] font-bold">{{item.name}}</p>

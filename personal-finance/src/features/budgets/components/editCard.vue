@@ -1,18 +1,55 @@
 <script setup>
 import {ref, onMounted, onUnmounted, onUpdated} from "vue";
 import Dropdown from "@/components/dropdown.vue";
+import { useBudgetsStore } from "@/features/budgets/store/useBudgetsStore.ts";
+import {storeToRefs} from "pinia";
+import {putData} from "@/utils/helpers.ts";
 
+console.log("----editCard")
+const store = useBudgetsStore();
+const { budgets } = storeToRefs(store);
+const props = defineProps({
+  id: {
+    type: Number,
+    required: true
+  }
+})
 const emit = defineEmits(['closeModal'])
+const closeModal = () => {
+  emit('closeModal')
+}
+
+const idx = budgets.value.findIndex(p => p.id === Number(props.id));
+const originalCard= budgets.value[idx];
+const card = ref({
+  id: originalCard["id"],
+  category: originalCard["category"],
+  max: originalCard["max"],
+  spent: originalCard["spent"],
+  remaining: originalCard["remaining"],
+  color: originalCard["color"],
+  items: originalCard["items"],
+})
+
+
+const budgetsUrl = import.meta.env.VITE_API_BUDGETS_URL
+const save = async() => {
+  try{
+    await putData(budgetsUrl, props.id, card.value)
+    budgets.value[idx] = card.value
+    closeModal();
+  }
+  catch (err){
+    console.error("save failed:", err)
+  }
+}
+
 const isMdUp = ref(false);
 const widthSmall = '295px'
 const widthMid = '496px'
 const arr = ['a', 'b', 'c']
 let mediaQuery
 const showModal = ref(true);
-const closeModal = () => {
-  emit('closeModal')
-}
-
 onMounted(() => {
   mediaQuery = window.matchMedia("(min-width: 768px)")
   isMdUp.value = mediaQuery.matches
@@ -44,21 +81,22 @@ onUpdated(() => {
       <div class="flex flex-col justify-between h-58.25">
         <div class="">
           <span>Budget Category</span>
-          <dropdown :items="arr" :select-width="isMdUp ? widthMid : widthSmall"
+          <dropdown :items="arr" :select-width="isMdUp ? widthMid : widthSmall" @updatedOption="val => card.category=val"
                     options-gap="3rem" id="budget"/>
         </div>
-        <div class="">
+        <div class="relative">
           <span>Maximum Spend</span>
-          <dropdown :items="arr" :select-width="isMdUp ? widthMid : widthSmall"
-                    options-gap="3rem" id="budget"/>
+          <div class="target_local">
+            <input v-model="card.max" class=" w-full border pl-6 border-[#696868] hover:border-black rounded-lg h-11.25" type="number">
+          </div>
         </div>
         <div class="">
           <span>Theme</span>
-          <dropdown items="arr" :select-width="isMdUp ? widthMid : widthSmall"
+          <dropdown :items="arr" :select-width="isMdUp ? widthMid : widthSmall" @updatedOption="val => card.color=val"
                     options-gap="3rem" id="budget"/>
         </div>
       </div>
-      <button class="bg-black text-white rounded-lg h-13.25">Save Changes</button>
+      <button @click="save" class="bg-black text-white rounded-lg h-13.25">Save Changes</button>
     </div>
 </div>
 </template>
@@ -69,5 +107,15 @@ onUpdated(() => {
   inset: 0;
   position: fixed;
   z-index: 10;
+}
+
+
+.target_local::before{
+  content:"$";
+  position: absolute;
+  left: 10px;
+  top: 35px;
+  font-size: 16px;
+  color: gray;
 }
 </style>

@@ -1,13 +1,40 @@
 <script setup>
 import {ref, onMounted, onUnmounted, onUpdated} from "vue";
 import Dropdown from "@/components/dropdown.vue";
+import {deleteData} from "@/utils/helpers.ts";
 
+import { useBudgetsStore } from "@/features/budgets/store/useBudgetsStore.ts";
+import {storeToRefs} from "pinia";
+
+console.log("----editCard")
+const store = useBudgetsStore();
+const { budgets } = storeToRefs(store);
+const props = defineProps({
+  id: {
+    type: Number,
+    required: true
+  }
+})
 const emit = defineEmits(['closeModal'])
-const showModal = ref(true);
 const closeModal = () => {
   emit('closeModal')
 }
 
+const budgetsUrl = import.meta.env.VITE_API_BUDGETS_URL
+const handleDelete = async() => {
+  try{
+    await deleteData(budgetsUrl, props.id)
+    budgets.value.forEach((val, index)=>{
+      if (val.id === props.id){
+        budgets.value.splice(index, 1);
+      }
+    })
+    closeModal();
+  }
+  catch (err){
+    console.error("save failed:", err)
+  }
+}
 
 </script>
 
@@ -23,12 +50,12 @@ const closeModal = () => {
       <p class="text-gray-500 text-sm h-15.75 md:h-10.5">Are you sure you want to delete this budget? This action cannot be reversed,
         and all the data inside it will be removed forever.</p>
       <button
-          @click=""
+          @click="handleDelete"
           class="bg-[#d46c5e] text-white text-sm rounded-lg h-13.25">
             Yes, Confirm Deletion
       </button>
       <button
-          @click=""
+          @click="closeModal"
           class="text-gray-500 rounded-lg text-sm h-5.25">
             No, Go back
       </button>
