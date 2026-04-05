@@ -65,14 +65,23 @@ export const potsOverviewData = (pots: Pots[]) => {
 
 export const budgetsOverviewData = (budget: Budget[]) => {
     let totalSpent: number = 0;
-    let totalLeft: number = 0;
-    let items: Record<string, string|number> = {};
+    let categoryMax: Record<string, number> = {};
+    let maxLimit: number = 0;
+    let budgetSum: Record<string, number> = {};
     budget.forEach((obj: Budget, idx: number) => {
         totalSpent += obj.spent;
-        totalLeft += obj.left;
-        items[obj.category] = obj.spent;
+        maxLimit += obj.max;
+        if (!(obj.category in budgetSum)){
+            budgetSum[obj.category] = obj.spent;
+            categoryMax[obj.category] = obj.max;
+
+        }
+        else{
+            budgetSum[obj.category] = (budgetSum[obj.category] ?? 0 ) + obj.spent; // basically budgetSum += spent with null check
+            categoryMax[obj.category] = (categoryMax[obj.category] ?? 0 ) + obj.spent; // basically budgetSum += spent with null check
+        }
     })
-    return {totalSpent, totalLeft, items}
+    return {maxLimit, totalSpent, budgetSum, categoryMax}
 }
 
 export const billsOverviewData = (bills: Bill[]) => {}
@@ -285,4 +294,4 @@ export const sortBy = (field:string, arr:Transaction[]) => {
 export const getUniqueCategory = (arr:Transaction[]) => {
     //Return an array of the unique Categories properties within the Transactions array
       // .filter(obj > obj && typeof obj === "object" && prop in obj) // ensure valid objects
-  return [...new Set(arr.map(obj => obj.category))]; }
+  return [...new Set(arr.map(obj => obj.category))].sort(); }

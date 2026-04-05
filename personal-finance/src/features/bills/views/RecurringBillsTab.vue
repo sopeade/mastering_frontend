@@ -22,7 +22,11 @@ onUnmounted(() => {
 <template>
   <section class="grid gap-8 pt-6">
     <div class="name-header flex justify-between">
-      <p class="font-bold text-[32px]">Recurring Bills</p>
+      <h1 class="font-bold text-[32px]">Recurring Bills</h1>
+      <button @click="" class="flex items-center px-4 cursor-pointer hover:bg-[#9ca3af] bg-black rounded-lg gap-2 text-white">
+        <i class="material-icons scale-80">add</i>
+        <span>Add Bill</span>
+      </button>
     </div>
     <div class="flex flex-col lg:flex-row gap-6">
       <div class="flex flex-col md:flex-row lg:flex-col lg:min-w-61 gap-3">
@@ -52,7 +56,7 @@ onUnmounted(() => {
       <div class="grid gap-6 lg:flex-3 bg-white px-5 py-6 rounded-xl shadow-cardShadow">
         <div class="search_sort_bar_local flex items-center justify-between gap-6 h-11.25">
           <input class="search_icon_local basis-4/5 md:basis-1/2 cursor-pointer h-full
-          border rounded-lg border-[#696868] hover:border-black"
+          border rounded-lg border-[#9ca3af] hover:border-black"
                  placeholder="Search bills" type="text">
           <img class="h-5 w-5 md:hidden" src="@/assets/images/icon-sort-mobile.svg" alt="">
           <div class="hidden md:flex gap-2 h-full">

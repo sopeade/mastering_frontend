@@ -2,11 +2,12 @@
   import coloredItems from "@/features/overview/components/coloredItems.vue"
   import {onMounted, onUnmounted} from "vue";
   import {useOverviewStore} from "@/features/overview/store/useOverviewStore.ts";
+  import { usePotsStore } from "@/features/pots/store/usePotsStore.ts";
   import {storeToRefs} from "pinia";
 
   const store = useOverviewStore();
   const { getPots } = store;
-  const { potsSummary } = storeToRefs(store);
+  const { activeTab, potsSummary } = storeToRefs(store);
   onMounted(async() => {
     await getPots();
   })
@@ -21,9 +22,10 @@
       <div class="flex justify-between">
         <h1 class="font-bold text-[20px]">Pots</h1>
         <p class="flex gap-3 cursor-pointer">
-          <span>
+          <button @click="activeTab='pots'"
+            class="self-start">
             See Details
-          </span>
+          </button>
           <span class="flex h-6">
             <img class="h-3 self-center" src="@/assets/images/icon-caret-right.svg" alt="">
           </span>

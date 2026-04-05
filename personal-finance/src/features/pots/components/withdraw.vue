@@ -99,9 +99,11 @@ onUpdated(() => {
         </div>
       </div>
 
-      <div class="target_local relative h-16.75 grid">
+      <div class="relative h-16.75 grid">
         <span>Amount to Withdraw</span>
-        <input v-model="withdrawal" class="pot_name_local  border border-[#696868] pl-10 h-11.25 cursor-pointer hover:border hover:border-black rounded-lg" type="number">
+        <div class="target_local">
+          <input v-model="withdrawal" class="pot_name_local  border border-[#9ca3af] pl-9 h-11.25 cursor-pointer hover:border hover:border-black rounded-lg" type="number">
+        </div>
       </div>
       <button @click="subtractFromSavings" class="bg-black text-white rounded-lg h-13.25">Confirm Withdrawal</button>
     </div>

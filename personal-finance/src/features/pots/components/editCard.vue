@@ -77,26 +77,26 @@ onUpdated(() => {
           <img src="@/assets/images/icon-close-modal.svg" alt="close">
         </button>
       </div>
-      <p class="">If your saving targets change, feel free to update your pots.</p>
+      <p class="text-gray-500 text-sm">If your saving targets change, feel free to update your pots.</p>
       <div class="flex flex-col justify-between h-58.25">
         <div class="">
-          <span>Pot Name</span>
-          <input v-model="card.name" class=" border w-full border-gray-400 pl-3 rounded-lg h-11.25" type="text">
+          <span class="text-gray-500 font-bold text-xs">Pot Name</span>
+          <input v-model="card.name" class=" border w-full border-gray-400 pl-5 rounded-lg h-11.25" type="text">
         </div>
         <div class="relative">
-          <span>Target</span>
+          <span class="text-gray-500 font-bold text-xs">Target</span>
           <div class="target_local">
-            <input v-model="card.target" class=" border w-full border-gray-400 pl-6 rounded-lg h-11.25" type="number">
+            <input v-model="card.target" class=" border w-full border-gray-400 pl-9 rounded-lg h-11.25" type="number">
           </div>
 
         </div>
         <div class="">
-          <span>Theme</span>
+          <span class="text-gray-500 font-bold text-xs">Theme</span>
           <dropdown :items="arr" :select-width="isMdUp ? widthMid : widthSmall" @updatedOption="val => card.color=val"
-                    select-focus-border="1px solid #696868" options-gap="3rem" id="budget"/>
+                    select-focus-border="1px solid #9ca3af" options-gap="3rem" id="budget"/>
         </div>
       </div>
-      <button @click="save" class="bg-black text-white rounded-lg h-13.25">Save Changes</button>
+      <button @click="save" class="bg-black text-white rounded-lg h-13.25 font-bold text-sm">Save Changes</button>
     </div>
 </div>
 </template>
@@ -112,7 +112,7 @@ onUpdated(() => {
 .target_local::before{
   content:"$";
   position: absolute;
-  left: 10px;
+  left: 20px;
   top: 35px;
   font-size: 16px;
   color: gray;

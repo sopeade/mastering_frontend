@@ -65,25 +65,27 @@ onUpdated(() => {
           <img src="@/assets/images/icon-close-modal.svg" alt="close">
         </button>
       </div>
-      <p class="">Choose a category to set a spending budget. These categories can help you
+      <p class="text-gray-500 text-sm">Choose a category to set a spending budget. These categories can help you
       monitor spending.</p>
       <div class="flex flex-col justify-between h-58.25">
         <div class="">
-          <span>Budget Category</span>
+          <span class="text-gray-500 font-bold text-xs">Budget Category</span>
           <dropdown :items="arr" :select-width="isMdUp ? widthMid : widthSmall" @updatedOption="val => newBudget.category=val"
-                    select-border="1px solid #696868" options-gap="3rem" id="budget"/>
-        </div>
-        <div class="">
-          <span class="target_local">Maximum Spending</span>
-          <input v-model="newBudget.max" class=" w-full border border-[#696868] hover:border-black rounded-lg h-11.25" type="number">
+                    select-border="1px solid #9ca3af" options-gap="3rem" id="budget"/>
         </div>
         <div class="relative">
-          <span>Color Tag</span>
+          <span class="text-gray-500 font-bold text-xs">Maximum Spending</span>
+          <div class="target_local">
+            <input v-model="newBudget.max" class="w-full border border-[#9ca3af] pl-9 hover:border-black rounded-lg h-11.25" type="number">
+          </div>
+        </div>
+        <div class="relative">
+          <span class="text-gray-500 font-bold text-xs">Theme</span>
           <dropdown :items="arr" :select-width="isMdUp ? widthMid : widthSmall" @updatedOption="val => newBudget.color=val"
-                    select-border="1px solid #696868" options-gap="3rem" id="budget"/>
+                    select-border="1px solid #9ca3af" options-gap="3rem" id="budget"/>
         </div>
       </div>
-      <button @click="addingBudget" class="bg-black text-white rounded-lg h-13.25">Add Budget</button>
+      <button @click="addingBudget" class="bg-black text-white rounded-lg h-13.25 font-bold text-sm">Add Budget</button>
     </div>
 </div>
 </template>

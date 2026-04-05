@@ -1,7 +1,14 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import {ref, onMounted, onUnmounted} from 'vue';
 import menuBudget from '@/features/budgets/components/editBudgetDropdown.vue';
+import { useBudgetsStore } from "@/features/budgets/store/useBudgetsStore.ts";
+import { useTransactionStore } from "@/features/transactions/store/useTransactionStore.ts";
+import {storeToRefs} from "pinia";
 
+const budgetStore = useBudgetsStore();
+const { categoryOptions } = budgetStore;
+const { activeTab, categorySelection, useDefaultCategory } = storeToRefs(budgetStore);
+// const { activeTab } = storeToRefs(budgetStore);
 const props = defineProps({
   id:{
     type: Number,
@@ -20,11 +27,11 @@ const props = defineProps({
     required: false,
     default: 0
   },
-  remaining:{
-    type: Number,
-    required: false,
-    default: 0,
-  },
+  // remaining:{
+  //   type: Number,
+  //   required: false,
+  //   default: 0,
+  // },
   color:{
     type: String,
     required: false,
@@ -35,35 +42,17 @@ const props = defineProps({
     required: false,
   }
 })
-    // default: () => {[
-    //   {name: 'Papa Software',
-    //     amount: '$10.00',
-    //     date: '16 Aug 2024',
-    //   },
-    //   {name: 'Quebec Services',
-    //     amount: '$5.00',
-    //     date: '12 Aug 2024',
-    //   },
-    //   {name: 'Quebec Services',
-    //     amount: '$5.00',
-    //     date: '12 Aug 2024',
-    //   }
-    // ]}
-
-// const items = ref([
-//   {name: 'Papa Software',
-//    amount: '$10.00',
-//    date: '16 Aug 2024',
-//   },
-//   {name: 'Quebec Services',
-//    amount: '$5.00',
-//    date: '12 Aug 2024',
-//   },
-//   {name: 'Quebec Services',
-//    amount: '$5.00',
-//    date: '12 Aug 2024',
-//   },
-// ])
+onMounted(()=> {console.log("budgetCard mounted ----")})
+onUnmounted(() => {console.log("budgetCard unMounted ----")})
+const singleBudgetCategory = () => {
+  console.log("categoryOptions B : ", categoryOptions)
+  categorySelection.value = props.category; //filter by the provided category
+  console.log("categorySelection B: ", categorySelection.value)
+  const categoryIdx = categoryOptions.indexOf(props.category)
+  console.log("categoryIdx B", categoryIdx)
+  useDefaultCategory.value = true;
+  activeTab.value = 'transactions';
+}
 </script>
 
 
@@ -96,7 +85,7 @@ const props = defineProps({
           <div class="border-2 h-full w-1 rounded-lg border-potgrey"></div>
           <p class="grid text-[14px]">
             Remaining
-            <span class="font-bold">${{props.remaining}}</span>
+            <span class="font-bold">${{props.max - props.spent}}</span>
           </p>
         </div>
       </div>
@@ -105,7 +94,9 @@ const props = defineProps({
       <div class="flex justify-between">
         <h1 class="font-bold">Latest Spending</h1>
         <div class="flex gap-3 items-center">
-          <p>See All</p>
+          <button @click="singleBudgetCategory">
+            See All
+          </button>
           <img class="w-3 h-3" src="@/assets/images/icon-caret-right.svg" alt="">
         </div>
       </div>

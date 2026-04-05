@@ -1,6 +1,6 @@
 {
   "transactions": [
-    {
+   {
       "name": "Emma Richardson",
       "category": "Entertainment",
       "amount": 75.50,
@@ -20,7 +20,7 @@
     },
     {
       "name": "Sun Park",
-      "category": "personal Care",
+      "category": "Personal Care",
       "amount": 75.50,
       "date": "2015-05-22"
     },
@@ -32,7 +32,7 @@
     },
     {
       "name": "whats good",
-      "category": "personal Care",
+      "category": "Personal Care",
       "amount": -5.20,
       "date": "2020-09-29"
     },
@@ -62,13 +62,13 @@
     },
     {
       "name": "whats good",
-      "category": "personal Care",
+      "category": "Personal Care",
       "amount": -5.20,
       "date": "2020-09-29"
     },
     {
       "name": "Sun Park",
-      "category": "personal Care",
+      "category": "Personal Care",
       "amount": 75.50,
       "date": "2024-08-19"
     },
@@ -80,7 +80,7 @@
     },
     {
       "name": "whats good",
-      "category": "personal Care",
+      "category": "Personal Care",
       "amount": -5.20,
       "date": "2020-09-29"
     },
@@ -92,19 +92,19 @@
     },
     {
       "name": "Savory Bites Bistro",
-      "category": "personal Care",
+      "category": "Personal Care",
       "amount": 75.50,
       "date": "2024-08-19"
     },
     {
       "name": "Daniel Carter",
-      "category": "personal Care",
+      "category": "Personal Care",
       "amount": -75.50,
       "date": "2024-08-19"
     },
     {
       "name": "Sun Park",
-      "category": "personal Care",
+      "category": "Personal Care",
       "amount": 75.50,
       "date": "2024-08-19"
     },
@@ -116,9 +116,10 @@
     },
     {
       "name": "whats good",
-      "category": "personal Care",
+      "category": "Personal Care",
       "amount": -5.20,
       "date": "2020-09-29"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

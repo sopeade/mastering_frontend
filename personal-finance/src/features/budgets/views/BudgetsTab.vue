@@ -1,6 +1,6 @@
 <script setup>
 import {onUpdated, ref, onMounted, onUnmounted} from 'vue';
-import GraphB from "@/features/budgets/components/graphB.vue";
+import BudgetSummary from "@/features/budgets/components/budgetSummary.vue";
 import BudgetCard from "@/features/budgets/components/budgetCard.vue";
 import AddBudget from "@/features/budgets/components/addBudget.vue";
 
@@ -12,18 +12,18 @@ const { budgets } = storeToRefs(store);
 
 // console.log("Budgets data smtime during/before fetch: ", budgets.value)
 onMounted(async () => {
-  console.log("budgets tab mounted")
+  // console.log("budgets tab mounted")
   await store.getBudgets();
-  console.log("Budgetsdata after fetch: ", budgets.value)
+  // console.log("Budgetsdata after fetch: ", budgets.value)
 })
 const isAddBudget = ref(false);
 
 const showAddBudget = () => {
-  console.log("showAddBudget")
+  // console.log("showAddBudget")
   isAddBudget.value = true
 }
 onUnmounted(() => {
-  console.log("Budgets Tab Unmounted")
+  // console.log("Budgets Tab Unmounted")
 })
 </script>
 
@@ -38,13 +38,13 @@ onUnmounted(() => {
     </div>
     <div class="flex flex-col lg:flex-row gap-6">
       <div class="flex-2">
-        <graph-b/>
+        <budget-summary/>
       </div>
       <div class="grid flex-3 gap-6">
         <budget-card
             v-for="(budget, idx) in budgets" :key="budget.idx"
             :id="budget.id" :category="budget.category" :max="budget.max" :items="budget.items"
-            :spent="budget.spent" :remaining="budget.remaining" color="bg-blue-300"/>
+            :spent="budget.spent"  color="bg-blue-300"/>
       </div>
     </div>
   </section>

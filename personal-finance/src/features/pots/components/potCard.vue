@@ -65,13 +65,13 @@ const props = defineProps({
     <div class="flex justify-between h-13.25">
       <button
           @click="isAdd=true"
-          class="flex items-center gap-2 w-36 p-4 font-bold hover:bg-white hover:outline-1 hover:outline-[#696868] bg-peach rounded-lg">
+          class="flex items-center gap-2 w-36 p-4 font-bold hover:bg-white hover:outline-1 hover:outline-[#9ca3af] bg-peach rounded-lg">
         <span>&#43 </span>
         <span>Add Money</span>
       </button>
       <button
           @click="isWithdraw=true"
-          class="flex justify-center items-center w-36 p-4 hover:bg-white hover:outline-1 hover:outline-[#696868] font-bold bg-peach rounded-lg">
+          class="flex justify-center items-center w-36 p-4 hover:bg-white hover:outline-1 hover:outline-[#9ca3af] font-bold bg-peach rounded-lg">
         <span class="">Withdraw</span>
       </button>
     </div>

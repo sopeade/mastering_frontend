@@ -86,29 +86,29 @@ onUpdated(() => {
           <img src="@/assets/images/icon-close-modal.svg" alt="close">
         </button>
       </div>
-      <p class="">Create a pot to set savings targets.
+      <p class="text-gray-500 text-sm">Create a pot to set savings targets.
         These can help keep you on track as you save for special purchases.</p>
       <form class="flex flex-col justify-between h-58.25 mb-2" @submit.prevent="onAddingPotSubmit">
         <div class="grid h-22.25">
-          <span>Pot Name</span>
-          <input class="pot_name_local border h-11.25 pl-3 border-gray-400 rounded-lg" v-model="newPot.name" type="text">
+          <span class="text-gray-500 font-bold text-xs">Pot Name</span>
+          <input class="pot_name_local border h-11.25 pl-5 border-gray-400 rounded-lg" v-model="newPot.name" type="text">
 <!--          <form-error :error="v$.name.$error" :errorMsg="v$.name.$errors[0]?.$message"/>-->
           <small></small>
         </div>
-        <div class="grid h-16.75 relative mb-4">
-          <span>Target</span>
+        <div class="relative mb-4">
+          <span class="text-gray-500 font-bold text-xs">Target</span>
           <div class="target_local">
-            <input class=" border w-full border-gray-400 pl-6 rounded-lg h-11.25" v-model="newPot.target" type="number">
+            <input class=" border w-full border-gray-400 pl-9 rounded-lg h-11.25" v-model="newPot.target" type="number">
           </div>
         </div>
         <div class="h-16.75">
-          <span>Theme</span>
+          <span class="text-gray-500 font-bold text-xs">Theme</span>
 <!--          val => newPot.theme=val-->
           <dropdown :items="arr" :select-width="isMdUp ? widthMid : widthSmall" @updatedOption="val => newPot.color=val"
-                    select-focus-border="1px solid #696868" select-border="1px solid #99a1af" options-gap="3rem" id="theme"/>
+                    select-focus-border="1px solid #9ca3af" select-border="1px solid #99a1af" options-gap="3rem" id="theme"/>
         </div>
       </form>
-      <button @click="addingPot" class="bg-black text-white rounded-lg h-13.25">Add Pot</button>
+      <button @click="addingPot" class="bg-black text-white rounded-lg h-13.25 font-bold text-sm">Add Pot</button>
     </div>
 </div>
 </template>
@@ -125,7 +125,7 @@ onUpdated(() => {
 .target_local::before{
   content:"$";
   position: absolute;
-  left: 10px;
+  left: 20px;
   top: 35px;
   font-size: 16px;
   color: gray;

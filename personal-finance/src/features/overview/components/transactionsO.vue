@@ -1,12 +1,12 @@
 <script setup>
-import {ref, computed, onMounted} from 'vue';
-import {showSign} from "@/utils/helpers.ts";
-import { useTransactionStore } from "@/features/transactions/store/useTransactionStore.ts";
-import {storeToRefs} from "pinia";
+import { onMounted } from 'vue';
+import { showSign } from "@/utils/helpers.ts";
+import { useOverviewStore } from "@/features/overview/store/useOverviewStore.ts";
+import { storeToRefs } from "pinia";
 
-const store = useTransactionStore();
+const store = useOverviewStore();
 const { getTransactions } = store;
-const { transactions } = storeToRefs(store);
+const { activeTab, transactions } = storeToRefs(store);
 const props = defineProps({
   data: {
     type: Object,
@@ -26,9 +26,10 @@ const maxViewedTransactions = 5;
     <div class="flex justify-between mb-8">
       <h1 class="font-bold text-[20px]">Transactions</h1>
       <p class="flex gap-3 cursor-pointer">
-        <span>
+        <button @click="activeTab='transactions'"
+          class="self-start">
           View All
-        </span>
+        </button>
         <span class="flex max-h-6">
             <img class="h-3 self-center" src="@/assets/images/icon-caret-right.svg" alt="">
         </span>

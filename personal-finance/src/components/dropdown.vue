@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onBeforeUnmount } from 'vue';
 
+console.log("dropdown mounted ---")
 const props = defineProps({
   items: {
     type: Array,
@@ -14,7 +15,7 @@ const props = defineProps({
   selectBorder: {
     type: String,
     required: false,
-    default: '1px solid #696868',
+    default: '1px solid lightgray',
   },
   selectBorderRadius: {
     type: String,
@@ -24,7 +25,7 @@ const props = defineProps({
   selectFontSize: {
     type: String,
     required: false,
-    default: '1.2rem'
+    default: '0.875rem'
   },
   selectFocusBorder: {
     type: String,
@@ -49,7 +50,7 @@ const props = defineProps({
   selectPaddingX: {
     type: String,
     required: false,
-    default: '0.8rem'
+    default: '1.25rem'
   },
   selectPaddingY: {
     type: String,
@@ -64,7 +65,7 @@ const props = defineProps({
   optionItemPaddingX: {
     type: String,
     required: false,
-    default: '0.8rem',
+    default: '1.25rem',
   },
   optionItemPaddingY: {
     type: String,
@@ -91,6 +92,11 @@ const props = defineProps({
     required: false,
     default: ''
   },
+
+  useDefaultText: {
+    type: Boolean,
+    required: false,
+  },
 })
 
 const dropdownRef = ref(null);
@@ -102,6 +108,10 @@ const isHover = ref(false);
 const isItemHover = ref(Array(props.items.length).fill(false));
 
 console.log("selectedOption", selectedOption.value)
+if (props.useDefaultText){
+  console.log("using default text")
+  selectedOption.value = -1
+}
 const toggleCustomSelect = () => {
   const isClosed = showDropdown.value === false;
   if (isClosed){openDropdown()}

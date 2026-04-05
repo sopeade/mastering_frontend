@@ -26,7 +26,6 @@ const card = ref({
   category: originalCard["category"],
   max: originalCard["max"],
   spent: originalCard["spent"],
-  remaining: originalCard["remaining"],
   color: originalCard["color"],
   items: originalCard["items"],
 })
@@ -77,26 +76,26 @@ onUpdated(() => {
           <img src="@/assets/images/icon-close-modal.svg" alt="close">
         </button>
       </div>
-      <p class="">As your budgets change, feel free to update your spending limits.</p>
+      <p class="text-gray-500 text-sm">As your budgets change, feel free to update your spending limits.</p>
       <div class="flex flex-col justify-between h-58.25">
         <div class="">
-          <span>Budget Category</span>
+          <span class="text-gray-500 font-bold text-xs">Budget Category</span>
           <dropdown :items="arr" :select-width="isMdUp ? widthMid : widthSmall" @updatedOption="val => card.category=val"
                     options-gap="3rem" id="budget"/>
         </div>
         <div class="relative">
-          <span>Maximum Spend</span>
+          <span class="text-gray-500 font-bold text-xs">Maximum Spend</span>
           <div class="target_local">
-            <input v-model="card.max" class=" w-full border pl-6 border-[#696868] hover:border-black rounded-lg h-11.25" type="number">
+            <input v-model="card.max" class=" w-full border pl-9 border-[#9ca3af] hover:border-black rounded-lg h-11.25" type="number">
           </div>
         </div>
         <div class="">
-          <span>Theme</span>
+          <span class="text-gray-500 font-bold text-xs">Theme</span>
           <dropdown :items="arr" :select-width="isMdUp ? widthMid : widthSmall" @updatedOption="val => card.color=val"
                     options-gap="3rem" id="budget"/>
         </div>
       </div>
-      <button @click="save" class="bg-black text-white rounded-lg h-13.25">Save Changes</button>
+      <button @click="save" class="bg-black text-white rounded-lg h-13.25 font-bold text-sm">Save Changes</button>
     </div>
 </div>
 </template>
@@ -113,7 +112,7 @@ onUpdated(() => {
 .target_local::before{
   content:"$";
   position: absolute;
-  left: 10px;
+  left: 20px;
   top: 35px;
   font-size: 16px;
   color: gray;

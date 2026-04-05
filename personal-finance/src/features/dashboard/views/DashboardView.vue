@@ -11,11 +11,12 @@ import BudgetIcon from '@/features/budgets/components/icons/budgetIcon.vue';
 import potsIcon from '@/features/pots/components/icons/pots.vue';
 import recurringIcon from '@/features/bills/components/icons/bills.vue';
 import { useBudgetsStore } from "@/features/budgets/store/useBudgetsStore.ts";
+import { useDashboardStore } from "@/features/dashboard/store/useDashboardStore.ts";
 import { storeToRefs } from "pinia";
 
-const activeTab = ref('overview')
-const store = useBudgetsStore();
-// const { budgets } = storeToRefs(store);
+// const activeTab = ref('overview')
+const store = useDashboardStore();
+const { activeTab } = storeToRefs(store);
 
 // console.log("overview data smtime during/before fetch: ", budgets.value)
 onMounted(async () => {

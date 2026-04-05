@@ -1,5 +1,9 @@
 <script setup>
+import { useOverviewStore } from "@/features/overview/store/useOverviewStore.ts";
+import { storeToRefs } from "pinia";
 
+const store = useOverviewStore();
+const { activeTab } = storeToRefs(store);
 
 const props = defineProps({
   data: {
@@ -16,9 +20,10 @@ const props = defineProps({
     <div class="flex justify-between">
       <h1 class="font-bold text-[20px]">Recurring Bills</h1>
       <p class="flex gap-3 cursor-pointer">
-        <span>
+        <button @click="activeTab='recurring-bills'"
+          class="self-start">
           See Details
-        </span>
+        </button>
         <span class="flex h-6">
           <img class="h-3 self-center" src="@/assets/images/icon-caret-right.svg" alt="">
         </span>

@@ -4,6 +4,7 @@ import { usePotsStore } from "@/features/pots/store/usePotsStore.ts";
 import { useBudgetsStore } from "@/features/budgets/store/useBudgetsStore.ts";
 import { useBillsStore } from "@/features/bills/store/useBillsStore.ts";
 import { useTransactionStore } from "@/features/transactions/store/useTransactionStore.ts";
+import { useDashboardStore } from "@/features/dashboard/store/useDashboardStore.ts";
 
 
 export const useOverviewStore = defineStore("overviewStore", () => {
@@ -11,6 +12,7 @@ export const useOverviewStore = defineStore("overviewStore", () => {
     const budgetsStore = useBudgetsStore();
     const billsStore = useBillsStore();
     const transactionStore = useTransactionStore();
+    const dashboardStore = useDashboardStore();
 
     const { getPots } = potsStore;
     const { getBudgets } = budgetsStore;
@@ -19,6 +21,7 @@ export const useOverviewStore = defineStore("overviewStore", () => {
     const { pots } = storeToRefs(potsStore);
     const { budgets } = storeToRefs(budgetsStore);
     const { transactions } = storeToRefs(transactionStore);
+    const { activeTab } = storeToRefs(dashboardStore);
 
     const potsSummary = computed(()=>{
         let total:number = 0;
@@ -56,10 +59,12 @@ export const useOverviewStore = defineStore("overviewStore", () => {
 
     console.log("pots in store", pots.value)
     return {
+        activeTab,
         getPots,
         getBudgets,
         getTransactions,
         potsSummary,
+        transactions,
         budgetsSummary,
     }
 })

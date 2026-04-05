@@ -15,11 +15,7 @@
   console.log("potsSummary", potsSummary.value);
 
   onMounted(async () => {
-  // onBeforeMount(async () => {
     console.log("Overview Tab Mounted")
-    // await getPots();
-    // await getBudgets();
-    // await getTransactions();
   })
 
   onUnmounted(() => {

@@ -83,7 +83,7 @@ onUpdated(() => {
       <div class="flex flex-col justify-between h-28.5">
         <div class="grid h-22.25 gap-4">
           <p class="flex justify-between items-center h-9.5">
-            <span class="text-sm">New Amount</span>
+            <span class="text-sm text-gray-500">New Amount</span>
             <span class="text-[32px] font-bold">${{currSaved}}</span>
           </p>
           <div class="flex flex-col justify-between h-9.75">
@@ -101,8 +101,8 @@ onUpdated(() => {
       </div>
 
       <div class="target_local relative h-16.75 grid">
-        <span>Amount to Add</span>
-        <input v-model="addition" class="pot_name_local border pl-10 h-11.25 hover:outline-1 hover:outline-[#696868] cursor-pointer border-gray-400 rounded-lg" type="number">
+        <span class="text-xs font-bold text-gray-500">Amount to Add</span>
+        <input v-model="addition" class="pot_name_local border pl-10 h-11.25 hover:outline-1 hover:outline-[#9ca3af] cursor-pointer border-gray-400 rounded-lg" type="number">
       </div>
       <button @click="addToSavings" class="bg-black text-white rounded-lg h-13.25">Confirm Addition</button>
     </div>

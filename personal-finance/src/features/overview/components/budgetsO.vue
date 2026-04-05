@@ -7,7 +7,7 @@ import {onMounted, ref} from 'vue';
 
   const store = useOverviewStore();
   const { getBudgets } = store;
-  const { budgetsSummary } = storeToRefs(store);
+  const { activeTab, budgetsSummary } = storeToRefs(store);
 
   onMounted(async() => {
     await getBudgets();
@@ -28,9 +28,10 @@ import {onMounted, ref} from 'vue';
     <div class="flex justify-between">
       <h1 class="font-bold text-[20px]">Budgets</h1>
       <p class="flex gap-3 cursor-pointer">
-        <span>
+        <button @click="activeTab='budgets'"
+          class="self-start">
           See Details
-        </span>
+        </button>
         <span class="flex h-6">
           <img class="h-3 self-center" src="@/assets/images/icon-caret-right.svg" alt="">
         </span>
